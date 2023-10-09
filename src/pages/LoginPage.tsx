@@ -1,0 +1,85 @@
+import axios from "axios";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { FcGoogle } from "react-icons/fc";
+import { DiGithubAlt } from "react-icons/di";
+
+export default function LoginPage() {
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async () => {
+    var response = await axios.post("https://reqres.in/api/login", {
+      email: email,
+      password: password,
+    });
+    if (response.status === 200) {
+      navigate("/");
+    }
+    console.log(response.data);
+  };
+
+  return (
+    <div className="h-screen w-screen grid grid-cols-1 md:grid-cols-2 p-6 m-0">
+      <div className="hidden md:block bg-red-50 rounded-2xl">
+        {/* image to be handled later */}1
+      </div>
+      <div className="h-full w-full flex items-center p-4">
+        {/* login form starts here */}
+        <div className="h-1/2 w-full flex flex-col justify-center items-center">
+          <h1 className="font-bold">Hi welcome!</h1>
+          <h3>lets get you signed in!</h3>
+          <div className="form-control w-full max-w-xs">
+            {/* email text field */}
+            <label className="label">
+              <span className="label-text">Email</span>
+            </label>
+            <input
+              type="text"
+              placeholder="you@example.com"
+              className="input input-bordered w-full max-w-xs"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            {/* password text field */}
+            <div className="form-control w-full max-w-xs">
+              <label className="label">
+                <span className="label-text">Password</span>
+              </label>
+              <input
+                type="text"
+                placeholder="8 characters long"
+                className="input input-bordered w-full max-w-xs"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            {/* other */}
+            <div className="flex flex-row justify-between items-center mt-6">
+              <button className="btn btn-ghost">Forgot password?</button>
+              <button className="btn btn-ghost">New User?</button>
+            </div>
+            <button
+              className="btn btn-block btn-primary mt-4"
+              onClick={handleLogin}
+            >
+              Login
+            </button>
+            <div className="divider">OR</div>
+            {/* other login options will go here */}
+            <div className="flex flex-row justify-evenly items-center mt-6">
+              <button className="btn btn-outline">
+                <FcGoogle />
+                Google
+              </button>
+              <button className="btn btn-outline">
+                <DiGithubAlt />
+                Github
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
