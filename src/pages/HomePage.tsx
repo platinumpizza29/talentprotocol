@@ -15,7 +15,20 @@ export default function HomePage() {
             >
               <BiMenuAltLeft className="text-2xl" />
             </label>
-            <a className="btn btn-ghost normal-case text-xl">project 2024</a>
+            {/* header and navigation */}
+            <div className="flex flex-row justify-between items-center w-full">
+              <a className="btn btn-ghost normal-case text-2xl">
+                TalentProtocol
+              </a>
+              <div className="">
+                <button className="btn btn-outline btn-accent mr-2">
+                  Applied Jobs
+                </button>
+                <button className="btn btn-outline btn-accent">
+                  Saved Jobs
+                </button>
+              </div>
+            </div>
           </div>
           {/* cards comp begins here */}
           <div className="h-full w-full  p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -29,9 +42,12 @@ export default function HomePage() {
                 <div className="card-actions justify-end">
                   <button
                     className="btn btn-accent"
-                    onClick={() =>
-                      document.getElementById("my_modal_5").showModal()
-                    }
+                    onClick={() => {
+                      const dialog = document.getElementById(
+                        "my_modal_5"
+                      ) as HTMLDialogElement;
+                      dialog?.showModal();
+                    }}
                   >
                     View Details
                   </button>
