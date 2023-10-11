@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { DiGithubAlt } from "react-icons/di";
+import Lottie from "lottie-react";
+import animationData from "../assets/job.json";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -11,7 +13,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
 
   const handleLogin = async () => {
-    var response = await axios.post("https://reqres.in/api/login", {
+    const response = await axios.post("https://reqres.in/api/login", {
       email: email,
       password: password,
     });
@@ -23,9 +25,14 @@ export default function LoginPage() {
 
   return (
     <div className="h-screen w-screen grid grid-cols-1 md:grid-cols-2 p-6 m-0">
-      <div className="hidden md:block bg-red-50 rounded-2xl">
-        {/* image to be handled later */}1
+      <div
+        className="hidden md:flex rounded-2xl items-center justify-center"
+        style={{ width: "80%", height: "80%", objectFit: "cover" }}
+      >
+        {/* image to be handled later */}
+        <Lottie animationData={animationData} height={"90%"} width={"90%"} />
       </div>
+
       <div className="h-full w-full flex items-center p-4">
         {/* login form starts here */}
         <div className="h-1/2 w-full flex flex-col justify-center items-center">
