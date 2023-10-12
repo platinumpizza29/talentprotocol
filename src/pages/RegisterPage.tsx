@@ -1,15 +1,15 @@
 import { FcGoogle } from "react-icons/fc";
 import { DiGithubAlt } from "react-icons/di";
-import { useState } from "react";
+// import { useState } from "react";
 
 export default function RegisterPage() {
-  const [fname, setFname] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  // const [fname, setFname] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
 
-  const handleRegister = async () => {
-    console.log(fname, email, password);
-  };
+  // const handleRegister = async () => {
+  //   console.log(fname, email, password);
+  // };
 
   return (
     // register page main div
@@ -32,7 +32,7 @@ export default function RegisterPage() {
                 type="text"
                 placeholder="John Doe"
                 className="input input-bordered w-full max-w-xs"
-                onChange={(e) => setFname(e.target.value)}
+                //  onChange={(e) => setFname(e.target.value)}
               />
               <label className="label">
                 <span className="label-text">Email</span>
@@ -41,7 +41,7 @@ export default function RegisterPage() {
                 type="email"
                 placeholder="you@example.com"
                 className="input input-bordered w-full max-w-xs"
-                onChange={(e) => setEmail(e.target.value)}
+                // onChange={(e) => setEmail(e.target.value)}
               />
               {/* password text field */}
               <div className="form-control w-full max-w-xs">
@@ -52,7 +52,7 @@ export default function RegisterPage() {
                   type="password"
                   placeholder="8 characters long"
                   className="input input-bordered w-full max-w-xs"
-                  onChange={(e) => setPassword(e.target.value)}
+                  //  onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
               {/* other */}
@@ -61,7 +61,7 @@ export default function RegisterPage() {
               </div>
               <button
                 className="btn btn-block btn-primary mt-4"
-                onClick={handleRegister}
+                //  onClick={handleRegister}
               >
                 Register
               </button>

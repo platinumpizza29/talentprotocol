@@ -1,27 +1,27 @@
-import axios from "axios";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import axios from "axios";
+// import { useState } from "react";
+// import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { DiGithubAlt } from "react-icons/di";
 import Lottie from "lottie-react";
 import animationData from "../assets/job.json";
 
 export default function LoginPage() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
 
-  const handleLogin = async () => {
-    const response = await axios.post("https://reqres.in/api/login", {
-      email: email,
-      password: password,
-    });
-    if (response.status === 200) {
-      navigate("/");
-    }
-    console.log(response.data);
-  };
+  // const handleLogin = async () => {
+  //   const response = await axios.post("https://reqres.in/api/login", {
+  //     email: email,
+  //     password: password,
+  //   });
+  //   if (response.status === 200) {
+  //     navigate("/");
+  //   }
+  //   console.log(response.data);
+  // };
 
   return (
     <div className="h-screen w-screen grid grid-cols-1 md:grid-cols-2 p-6 m-0">
@@ -47,7 +47,7 @@ export default function LoginPage() {
               type="text"
               placeholder="you@example.com"
               className="input input-bordered w-full max-w-xs"
-              onChange={(e) => setEmail(e.target.value)}
+              // onChange={(e) => setEmail(e.target.value)}
             />
             {/* password text field */}
             <div className="form-control w-full max-w-xs">
@@ -58,7 +58,7 @@ export default function LoginPage() {
                 type="text"
                 placeholder="8 characters long"
                 className="input input-bordered w-full max-w-xs"
-                onChange={(e) => setPassword(e.target.value)}
+                // onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             {/* other */}
@@ -68,7 +68,7 @@ export default function LoginPage() {
             </div>
             <button
               className="btn btn-block btn-primary mt-4"
-              onClick={handleLogin}
+              // onClick={handleLogin}
             >
               Login
             </button>
