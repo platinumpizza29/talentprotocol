@@ -1,4 +1,4 @@
-import { BiMenuAltLeft } from "react-icons/bi";
+import { BiMenuAltLeft, BiCaretRight } from "react-icons/bi";
 
 export default function HomePage() {
   return (
@@ -20,14 +20,6 @@ export default function HomePage() {
               <a className="btn btn-ghost normal-case text-2xl">
                 TalentProtocol
               </a>
-              <div className="">
-                <button className="btn btn-outline btn-accent mr-2">
-                  Applied Jobs
-                </button>
-                <button className="btn btn-outline btn-accent">
-                  Saved Jobs
-                </button>
-              </div>
             </div>
           </div>
           {/* cards comp begins here */}
@@ -39,6 +31,7 @@ export default function HomePage() {
               <div className="card-body">
                 <h2 className="card-title">Nike</h2>
                 <p>Position eg Software Developer</p>
+
                 <div className="card-actions justify-end">
                   <button
                     className="btn btn-accent"
@@ -100,8 +93,28 @@ export default function HomePage() {
             className="modal modal-bottom sm:modal-middle"
           >
             <div className="modal-box">
-              <h3 className="font-bold text-lg">Company Name goes here!</h3>
-              <p className="py-4">Details about the position goes here</p>
+              <h3 className="font-bold text-lg">Nike</h3>
+              <p className="py-4">
+                <ul>
+                  <li className="text-xl font-bold">Requiments:</li>
+                  <p>
+                    Bachelor's degree in Computer Science, Software Engineering,
+                    or related field (or equivalent work experience). Proven
+                    experience as a Software Developer, Software Engineer, or
+                    similar role. Strong proficiency in one or more programming
+                    languages (e.g., Java, Python, C++, JavaScript). Experience
+                    with software development methodologies and practices
+                    (Agile, Scrum, version control, code review). Familiarity
+                    with database systems (SQL, NoSQL) and web application
+                    development. Knowledge of software testing and debugging
+                    techniques. Excellent problem-solving skills and attention
+                    to detail. Strong communication and interpersonal skills.
+                    Ability to work collaboratively in a team environment.
+                    Willingness to learn and adapt to new technologies and
+                    programming languages.
+                  </p>
+                </ul>
+              </p>
               <div className="modal-action">
                 <form method="dialog">
                   {/* if there is a button in form, it will close the modal */}
@@ -117,13 +130,31 @@ export default function HomePage() {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <ul className="menu p-4 w-80 min-h-full bg-base-100 text-base-content">
-            {/* Sidebar content here */}
+          <ul className="menu bg-base-200 h-full w-72 md:w-80">
             <li>
-              <a>Sidebar Item 1</a>
+              <a>
+                Applied Jobs <BiCaretRight />
+              </a>
             </li>
             <li>
-              <a>Sidebar Item 2</a>
+              <a>Saved Jobs</a>
+            </li>
+            <li>
+              <a>Filters</a>
+              <ul>
+                <li>
+                  <a>Software Developer</a>
+                </li>
+                <li>
+                  <a>Front End Developer</a>
+                </li>
+                <li>
+                  <a>Back End Developer</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a>Item 3</a>
             </li>
           </ul>
         </div>
