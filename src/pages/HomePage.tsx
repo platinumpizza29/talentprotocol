@@ -1,8 +1,8 @@
-import { BiMenuAltLeft, BiCaretRight } from "react-icons/bi";
+import { BiMenuAltLeft, BiCaretRight, BiFilterAlt } from "react-icons/bi";
 
 export default function HomePage() {
   return (
-    <div className="h-screen w-screen bg-base-100 overflow-y-auto">
+    <div className="h-screen w-screen bg-base-100 overflow-y-auto font-my-font">
       {/* navbar starts from here */}
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -17,8 +17,8 @@ export default function HomePage() {
             </label>
             {/* header and navigation */}
             <div className="flex flex-row justify-between items-center w-full">
-              <a className="btn btn-ghost normal-case text-2xl">
-                TalentProtocol
+              <a className="btn btn-ghost normal-case text-2xl font-my-font-bold">
+                Talent Protocol
               </a>
             </div>
           </div>
@@ -130,17 +130,21 @@ export default function HomePage() {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <ul className="menu bg-base-200 h-full w-72 md:w-80">
-            <li>
-              <a>
-                Applied Jobs <BiCaretRight />
+          <ul className="menu bg-base-100 h-full w-72 md:w-80 p-6">
+            <li className="">
+              <a className="flex flex-row justify-between items-center">
+                Applied Jobs <BiCaretRight className="text-lg" />
               </a>
             </li>
             <li>
-              <a>Saved Jobs</a>
+              <a className="flex flex-row justify-between items-center">
+                Saved Jobs <BiCaretRight className="text-lg" />
+              </a>
             </li>
             <li>
-              <a>Filters</a>
+              <a className="flex flex-row justify-between items-center">
+                Filters <BiFilterAlt className="text-lg" />
+              </a>
               <ul>
                 <li>
                   <a>Software Developer</a>
