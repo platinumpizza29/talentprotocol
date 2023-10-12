@@ -1,10 +1,10 @@
-import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { DiGithubAlt } from "react-icons/di";
 import Lottie from "lottie-react";
 import animationData from "../assets/job.json";
+import { useLogin } from "../controllers/UserController";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -12,15 +12,17 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = async () => {
-    const response = await axios.post("https://reqres.in/api/login", {
-      email: email,
-      password: password,
-    });
-    if (response.status === 200) {
-      navigate("/");
+  const { handleLogin } = useLogin();
+
+  const handleSubmit = async () => {
+    try {
+      const res = await handleLogin(email, password);
+      if (res === "ok") {
+        navigate("/home");
+      }
+    } catch (error) {
+      console.log(error);
     }
-    console.log(response.data);
   };
 
   return (
@@ -68,7 +70,7 @@ export default function LoginPage() {
             </div>
             <button
               className="btn btn-block btn-primary mt-4"
-              onClick={handleLogin}
+              onClick={handleSubmit}
             >
               Login
             </button>

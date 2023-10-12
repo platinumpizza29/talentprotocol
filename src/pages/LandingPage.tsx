@@ -7,8 +7,10 @@ import { FiUsers } from "react-icons/fi";
 import { FaSlackHash } from "react-icons/fa";
 import Lottie from "lottie-react";
 import animationData from "../assets/job.json";
+import { useNavigate } from "react-router-dom";
 
 export default function LandingPage() {
+  const navigate = useNavigate();
   return (
     <div className="h-screen w-screen font-my-font bg-base-100 overflow-x-hidden">
       {/* navbar starts here */}
@@ -36,12 +38,18 @@ export default function LandingPage() {
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
-                <a className="flex flex-row justify-between items-center">
+                <a
+                  className="flex flex-row justify-between items-center"
+                  onClick={() => navigate("/register")}
+                >
                   Sign Up <BiCaretRight className="text-lg" />
                 </a>
               </li>
               <li>
-                <a className="flex flex-row justify-between items-center">
+                <a
+                  className="flex flex-row justify-between items-center"
+                  onClick={() => navigate("/login")}
+                >
                   Sign In <BiCaretRight className="text-lg" />
                 </a>
               </li>
