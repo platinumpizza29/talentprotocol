@@ -1,9 +1,9 @@
 import axios from "axios";
-import { useAuthStore } from "../zustandStore/store"; // Import useState from React
+import  useAuthStore  from "../zustandStore/store"; // Import useState from React
 
 
 export const useLogin = () => {
-  const { setAuth } = useAuthStore();
+  const { login } = useAuthStore();
 
   const handleLogin = async (email: string, password: string) => {
     const url:string = "http://192.168.1.75:5000";
@@ -14,8 +14,7 @@ export const useLogin = () => {
       });
 
       if (response.status === 200) {
-        setAuth(true);
-        await localStorage.setItem("auth_key", response.data['token'])
+        login(response.data['token']);
         return "ok";
       } else {
         return "error";

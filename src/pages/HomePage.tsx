@@ -1,8 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { BiMenuAltLeft, BiCaretRight, BiFilterAlt } from "react-icons/bi";
+import { useNavigate } from "react-router-dom";
 
 export default function HomePage() {
+  const navigate = useNavigate();
+
   const [homePage, setHomePage] = useState([]);
 
   const getHomePage = async () => {
@@ -65,7 +68,12 @@ export default function HomePage() {
                     >
                       View Details
                     </button>
-                    <button className="btn btn-primary">Assessment</button>
+                    <button
+                      className="btn btn-primary"
+                      onClick={() => navigate("/test")}
+                    >
+                      Assessment
+                    </button>
                   </div>
                 </div>
               </div>
