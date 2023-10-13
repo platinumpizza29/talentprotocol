@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 export default function LandingPage() {
   const navigate = useNavigate();
   return (
-    <div className="h-screen w-screen font-my-font bg-base-100 overflow-x-hidden">
+    <div className="h-screen w-screen font-my-font bg-base-100 overflow-x-hidden !scroll-smooth">
       {/* navbar starts here */}
       <div className="navbar">
         <div className="navbar-start">
@@ -61,10 +61,18 @@ export default function LandingPage() {
         </div>
         <div className="navbar-end hidden lg:flex">
           <ul className="menu menu-horizontal p-1">
-            <button className="btn btn-outline btn-primary mr-2">
+            <button
+              className="btn btn-outline btn-primary mr-2"
+              onClick={() => navigate("/register")}
+            >
               Sign Up
             </button>
-            <button className="btn btn-primary">Sign In</button>
+            <button
+              className="btn btn-primary"
+              onClick={() => navigate("/login")}
+            >
+              Sign In
+            </button>
           </ul>
         </div>
       </div>

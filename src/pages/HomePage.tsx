@@ -1,6 +1,23 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { BiMenuAltLeft, BiCaretRight, BiFilterAlt } from "react-icons/bi";
 
 export default function HomePage() {
+  const [homePage, setHomePage] = useState([]);
+
+  const getHomePage = async () => {
+    const response = await axios.get(
+      "http://192.168.1.75:5000/v1/candidate/k@k.com/home"
+    );
+    if (response.status === 200) {
+      setHomePage(response.data["job_openings"]);
+    }
+  };
+
+  useEffect(() => {
+    getHomePage();
+  }, []);
+
   return (
     <div className="h-screen w-screen bg-base-100 overflow-y-auto font-my-font">
       {/* navbar starts from here */}
@@ -23,106 +40,63 @@ export default function HomePage() {
             </div>
           </div>
           {/* cards comp begins here */}
-          <div className="h-full w-full  p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            <div className="card card-compact max-w-96 h-96 m-4 bg-base-100 shadow-xl">
-              <figure>
-                <img src="nike.jpeg" alt="Shoes" />
-              </figure>
-              <div className="card-body">
-                <h2 className="card-title">Nike</h2>
-                <p>Position eg Software Developer</p>
+          <div className="h-full w-full p-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {homePage.map((item, index) => (
+              <div
+                className="card card-compact max-w-96 h-96 m-4 bg-base-100 shadow-xl md:w-full"
+                key={index}
+              >
+                <figure>
+                  <img src="nike.jpeg" alt="Shoes" />
+                </figure>
+                <div className="card-body">
+                  <h2 className="card-title">{item["org_name"]}</h2>
+                  <p>{item["opening_name"]}</p>
 
-                <div className="card-actions justify-end">
-                  <button
-                    className="btn btn-accent"
-                    onClick={() => {
-                      const dialog = document.getElementById(
-                        "my_modal_5"
-                      ) as HTMLDialogElement;
-                      dialog?.showModal();
-                    }}
-                  >
-                    View Details
-                  </button>
-                  <button className="btn btn-primary">Assessment</button>
+                  <div className="card-actions justify-end">
+                    <button
+                      className="btn btn-accent"
+                      onClick={() => {
+                        const dialog = document.getElementById(
+                          `${index}`
+                        ) as HTMLDialogElement;
+                        dialog?.showModal();
+                      }}
+                    >
+                      View Details
+                    </button>
+                    <button className="btn btn-primary">Assessment</button>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="card card-compact max-w-96 h-96 m-4 bg-base-100 shadow-xl">
-              <figure>
-                <img src="facebook.webp" alt="Shoes" />
-              </figure>
-              <div className="card-body">
-                <h2 className="card-title">Shoes!</h2>
-                <p>If a dog chews shoes whose shoes does he choose?</p>
-                <div className="card-actions justify-end">
-                  <button className="btn btn-primary">Buy Now</button>
-                </div>
-              </div>
-            </div>
-            <div className="card card-compact max-w-96 h-96 m-4 bg-base-100 shadow-xl">
-              <figure>
-                <img src="apple.jpeg" alt="Shoes" />
-              </figure>
-              <div className="card-body">
-                <h2 className="card-title">Shoes!</h2>
-                <p>If a dog chews shoes whose shoes does he choose?</p>
-                <div className="card-actions justify-end">
-                  <button className="btn btn-primary">Buy Now</button>
-                </div>
-              </div>
-            </div>
-            <div className="card card-compact max-w-96 h-96 m-4 bg-base-100 shadow-xl">
-              <figure>
-                <img src="microsoft.png" alt="Shoes" />
-              </figure>
-              <div className="card-body">
-                <h2 className="card-title">Shoes!</h2>
-                <p>If a dog chews shoes whose shoes does he choose?</p>
-                <div className="card-actions justify-end">
-                  <button className="btn btn-primary">Buy Now</button>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
-
           {/* Open the modal using document.getElementById('ID').showModal() method */}
-
-          <dialog
-            id="my_modal_5"
-            className="modal modal-bottom sm:modal-middle"
-          >
-            <div className="modal-box">
-              <h3 className="font-bold text-lg">Nike</h3>
-              <p className="py-4">
-                <ul>
+          {homePage.map((item, index) => (
+            <dialog
+              id={`${index}`}
+              className="modal modal-bottom sm:modal-middle"
+              key={index}
+            >
+              <div className="modal-box">
+                <div className="flex flex-row justify-between items-center">
+                  <h3 className="font-bold text-2xl">{item["org_name"]}</h3>
+                  <h3>{item["job_posted_at"]}</h3>
+                </div>
+                <span className="text-base-400">{item["org_id"]}</span>
+                <ul className="py-4">
                   <li className="text-xl font-bold">Requiments:</li>
-                  <p>
-                    Bachelor's degree in Computer Science, Software Engineering,
-                    or related field (or equivalent work experience). Proven
-                    experience as a Software Developer, Software Engineer, or
-                    similar role. Strong proficiency in one or more programming
-                    languages (e.g., Java, Python, C++, JavaScript). Experience
-                    with software development methodologies and practices
-                    (Agile, Scrum, version control, code review). Familiarity
-                    with database systems (SQL, NoSQL) and web application
-                    development. Knowledge of software testing and debugging
-                    techniques. Excellent problem-solving skills and attention
-                    to detail. Strong communication and interpersonal skills.
-                    Ability to work collaboratively in a team environment.
-                    Willingness to learn and adapt to new technologies and
-                    programming languages.
-                  </p>
+                  <p>{item["jd"]}</p>
                 </ul>
-              </p>
-              <div className="modal-action">
-                <form method="dialog">
-                  {/* if there is a button in form, it will close the modal */}
-                  <button className="btn">Close</button>
-                </form>
+                <div className="modal-action">
+                  <form method="dialog">
+                    {/* if there is a button in form, it will close the modal */}
+                    <button className="btn">Close</button>
+                  </form>
+                </div>
               </div>
-            </div>
-          </dialog>
+            </dialog>
+          ))}
         </div>
         <div className="drawer-side">
           <label
