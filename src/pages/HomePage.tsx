@@ -2,15 +2,19 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { BiMenuAltLeft, BiCaretRight, BiFilterAlt } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
+import useAuthStore from "../zustandStore/store";
 
 export default function HomePage() {
   const navigate = useNavigate();
-
+  const logout = useAuthStore((state) => state.logout);
   const [homePage, setHomePage] = useState([]);
 
   const getHomePage = async () => {
+    const userDetails = localStorage.getItem("user_details");
+    const user = JSON.parse(userDetails!);
+    const userEmail = user["email"];
     const response = await axios.get(
-      "http://192.168.1.75:5000/v1/candidate/k@k.com/home"
+      `http://192.168.1.75:5000/v1/candidate/${userEmail}/home`
     );
     if (response.status === 200) {
       setHomePage(response.data["job_openings"]);
@@ -19,7 +23,7 @@ export default function HomePage() {
 
   useEffect(() => {
     getHomePage();
-  }, []);
+  }, [homePage]);
 
   return (
     <div className="h-screen w-screen bg-base-100 overflow-y-auto font-my-font">
@@ -40,6 +44,27 @@ export default function HomePage() {
               <a className="btn btn-ghost normal-case text-2xl font-my-font-bold">
                 Talent Protocol
               </a>
+              <div className="dropdown dropdown-end">
+                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                  <div className="w-10 rounded-full">
+                    <img src="user.png" />
+                  </div>
+                </label>
+                <ul
+                  tabIndex={0}
+                  className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
+                >
+                  <li>
+                    <a className="justify-between">Profile</a>
+                  </li>
+                  <li>
+                    <a>Settings</a>
+                  </li>
+                  <li>
+                    <a onClick={logout}>Logout</a>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
           {/* cards comp begins here */}
@@ -70,7 +95,11 @@ export default function HomePage() {
                     </button>
                     <button
                       className="btn btn-primary"
-                      onClick={() => navigate("/test")}
+                      onClick={() =>
+                        navigate("/test", {
+                          state: { item: JSON.stringify(item) },
+                        })
+                      }
                     >
                       Assessment
                     </button>

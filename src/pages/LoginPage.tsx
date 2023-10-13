@@ -5,9 +5,12 @@ import { DiGithubAlt } from "react-icons/di";
 import Lottie from "lottie-react";
 import animationData from "../assets/job.json";
 import { useLogin } from "../controllers/UserController";
+import useAuthStore from "../zustandStore/store";
 
 export default function LoginPage() {
   const navigate = useNavigate();
+  const setLoading = useAuthStore((state) => state.setLoading);
+  const loading = useAuthStore((state) => state.loading);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,43 +18,22 @@ export default function LoginPage() {
   const { handleLogin } = useLogin();
 
   const handleSubmit = async () => {
-    const res = await handleLogin(email, password);
-    if (res === "ok") {
-      navigate("/home");
-    } else if (res === "error") {
-      <div className="alert alert-error">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="stroke-current shrink-0 h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-          />
-        </svg>
-        <span>Error! Invalid Credentials</span>
-      </div>;
-    } else {
-      <div className="alert alert-error">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="stroke-current shrink-0 h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-          />
-        </svg>
-        <span>Server Error! Please try again in some time</span>
-      </div>;
+    try {
+      const res = await handleLogin(email, password);
+      if (res === "ok") {
+        setLoading(true);
+        navigate("/home");
+      } else if (res === "error") {
+        console.log("error");
+        setLoading(false);
+      } else {
+        console.log("error");
+        setLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -102,6 +84,11 @@ export default function LoginPage() {
               className="btn btn-block btn-primary mt-4"
               onClick={handleSubmit}
             >
+              {loading ? (
+                <span className="loading loading-spinner loading-md"></span>
+              ) : (
+                "Login"
+              )}
               Login
             </button>
             <div className="divider">OR</div>

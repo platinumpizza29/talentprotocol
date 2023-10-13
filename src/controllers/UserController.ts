@@ -3,7 +3,7 @@ import  useAuthStore  from "../zustandStore/store"; // Import useState from Reac
 
 
 export const useLogin = () => {
-  const { login } = useAuthStore();
+  const { login, setUser } = useAuthStore();
 
   const handleLogin = async (email: string, password: string) => {
     const url:string = "http://192.168.1.75:5000";
@@ -15,6 +15,8 @@ export const useLogin = () => {
 
       if (response.status === 200) {
         login(response.data['token']);
+        await localStorage.setItem("user_details", JSON.stringify(response.data['user_details']))
+        setUser(response.data['user_details'])
         return "ok";
       } else {
         return "error";

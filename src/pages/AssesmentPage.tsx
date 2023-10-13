@@ -1,9 +1,43 @@
-import CodeEditorComp from "../components/CodeEditorComp";
-import TechnicalQuestionComp from "../components/TechnicalQuesComp";
-import { useState } from "react";
+import { Editor } from "@monaco-editor/react";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import useAuthStore from "../zustandStore/store";
 
 export default function AssessmentPage() {
-  const [count, setCount] = useState(0);
+  const location = useLocation();
+  const { item } = location.state || {};
+  const navigate = useNavigate();
+  const [problem, setProblem] = useState("");
+  const [code, setCode] = useState("");
+  const [data, setData] = useState({});
+  const codeStore = useAuthStore((state) => state.setCode);
+
+  const handleAssessment = async () => {
+    const decode = JSON.parse(item);
+    const opening_id = decode["_id"];
+    const org_name = decode["org_name"];
+    const response = await axios.get(
+      `http://192.168.1.75:5000/v1/org/${org_name}/openings/${opening_id}/assignment`
+    );
+    if (response.status === 200) {
+      setProblem(response.data["assignment"]["code_problem_statement"]);
+      setData(response.data);
+      console.log(response.data);
+    }
+  };
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function handleEditorChange(value: any, event: any) {
+    setCode(value);
+    codeStore(code);
+    console.log(event);
+  }
+
+  useEffect(() => {
+    handleAssessment();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="h-screen w-screen bg-base-100 font-my-font">
@@ -12,31 +46,25 @@ export default function AssessmentPage() {
         <div className="navbar-start">
           <a className="btn btn-ghost normal-case text-xl">Assessment</a>
         </div>
-        <div className="dropdown dropdown-end">
-          <label tabIndex={0} className="btn btn-ghost rounded-btn">
-            Select Language
-          </label>
-          <ul
-            tabIndex={0}
-            className="menu dropdown-content z-[1] p-2 shadow bg-base-100 rounded-box w-52 mt-4"
-          >
-            <li>
-              <a>Item 1</a>
-            </li>
-            <li>
-              <a>Item 2</a>
-            </li>
-          </ul>
-        </div>
         <div className="navbar-end">
-          <a className="btn btn-accent" onClick={() => setCount(count + 1)}>
-            Submit
+          <a
+            className="btn btn-accent btn-outline"
+            onClick={() => navigate("/techques", { state: { data: data } })}
+          >
+            Next
           </a>
         </div>
       </div>
       {/* code editor div will come here */}
       <div className="h-full mx-4 md:mx-12 lg:mx-24 xl:48">
-        {count == 0 ? <CodeEditorComp /> : <TechnicalQuestionComp />}
+        <div className="h-full w-full font-my-font">
+          <Editor
+            defaultLanguage="javascript"
+            defaultValue={`// ${problem}`}
+            width={"100%"}
+            onChange={handleEditorChange}
+          />
+        </div>
       </div>
     </div>
   );

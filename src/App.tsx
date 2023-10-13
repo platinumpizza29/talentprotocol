@@ -1,11 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
-import EditorPage from "./pages/EditorPage";
 import RegisterPage from "./pages/RegisterPage";
 import AssessmentPage from "./pages/AssesmentPage";
 import LandingPage from "./pages/LandingPage";
 import PrivateRoutes from "./utils/PrivateRoutes";
+import TechnicalQuesPage from "./pages/TechnicalQuesPage";
 
 function App() {
   return (
@@ -16,8 +16,8 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route element={<PrivateRoutes />}>
           <Route path="/home" element={<HomePage />} />
-          <Route path="/editor" element={<EditorPage />} />
           <Route path="/test" element={<AssessmentPage />} />
+          <Route path="/techques" element={<TechnicalQuesPage />} />
         </Route>
       </Routes>
     </Router>
