@@ -89,7 +89,6 @@ export default function LoginPage() {
               ) : (
                 "Login"
               )}
-              Login
             </button>
             <div className="divider">OR</div>
             {/* other login options will go here */}

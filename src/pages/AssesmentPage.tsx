@@ -14,22 +14,31 @@ export default function AssessmentPage() {
   const codeStore = useAuthStore((state) => state.setCode);
 
   const handleAssessment = async () => {
-    const decode = JSON.parse(item);
-    const opening_id = decode["_id"];
-    const org_name = decode["org_name"];
-    const response = await axios.get(
-      `http://192.168.1.75:5000/v1/org/${org_name}/openings/${opening_id}/assignment`
-    );
-    if (response.status === 200) {
-      setProblem(response.data["assignment"]["code_problem_statement"]);
-      setData(response.data);
-      console.log(response.data);
+    try {
+      const decode = JSON.parse(item);
+      const opening_id = decode["_id"];
+      const org_name = decode["org_name"];
+      console.log(
+        `http://192.168.1.75:5000/v1/org/${org_name}/openings/${opening_id}/assignment`
+      );
+      const response = await axios.get(
+        `http://192.168.1.75:5000/v1/org/${org_name}/openings/${opening_id}/assignment`
+      );
+      if (response.status === 200) {
+        setProblem(response.data["assignment"]["code_problem_statement"]);
+        setData(response.data);
+        console.log(response.data);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function handleEditorChange(value: any, event: any) {
     setCode(value);
+    console.log(value);
+
     codeStore(code);
     console.log(event);
   }

@@ -1,13 +1,18 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import axios from "axios";
+import useAuthStore from "../zustandStore/store";
+import { useTestController } from "../controllers/AssessmentController";
 
 export default function TechnicalQuesPage() {
   const location = useLocation();
   const data = location.state || {};
+  const { handleTestSubmit } = useTestController();
 
+  const code = useAuthStore((state) => state.code);
   const [codeAnalysisQues, setCodeAnalysisQues] = useState([]);
   const [techQues, setTechQues] = useState([]);
+  const [openingId, setOpeningId] = useState("");
+  const [assignmentId, setAssignmentId] = useState("");
   const [techAnswers, setTechAnswers] = useState(
     Array(techQues.length).fill("")
   );
@@ -22,6 +27,8 @@ export default function TechnicalQuesPage() {
   ) => {
     const updatedValues = [...codeAnalysisAnswers];
     updatedValues[index] = e.target.value;
+    console.log(updatedValues);
+
     setCodeAnalysisAnswers(updatedValues);
   };
 
@@ -35,16 +42,25 @@ export default function TechnicalQuesPage() {
   };
 
   const handleSubmitAnswers = async () => {
-    const url = "http://192.168.1.75:5000/";
-    const response = await axios.post(url, {});
-    if (response.status === 200) {
-      console.log(response.data);
-    }
+    const data = localStorage.getItem("user_details");
+    const decoded = JSON.parse(data!);
+    const email = decoded["email"];
+    const res = handleTestSubmit(
+      email,
+      openingId,
+      assignmentId,
+      code,
+      codeAnalysisAnswers,
+      techAnswers
+    );
+    console.log(res);
   };
 
   useEffect(() => {
     setCodeAnalysisQues(data.data["assignment"]["code_analysis_questions"]);
     setTechQues(data.data["assignment"]["technical_questions"]);
+    setAssignmentId(data.data["assignment"]["_id"]);
+    setOpeningId(data.data["assignment"]["opening_id"]);
   }, [data.data]);
 
   return (
