@@ -14,6 +14,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/" element={<LandingPage />} />
+        {/* to added to protected routes later */}
         <Route element={<PrivateRoutes />}>
           <Route path="/home" element={<HomePage />} />
           <Route path="/test" element={<AssessmentPage />} />

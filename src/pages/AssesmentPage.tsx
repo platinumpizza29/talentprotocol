@@ -18,14 +18,11 @@ export default function AssessmentPage() {
       const decode = JSON.parse(item);
       const opening_id = decode["_id"];
       const org_name = decode["org_name"];
-      console.log(
-        `http://192.168.1.75:5000/v1/org/${org_name}/openings/${opening_id}/assignment`
-      );
       const response = await axios.get(
         `http://192.168.1.75:5000/v1/org/${org_name}/openings/${opening_id}/assignment`
       );
       if (response.status === 200) {
-        setProblem(response.data["assignment"]["code_problem_statement"]);
+        setProblem(response.data["assignment"]["assignment_name"]);
         setData(response.data);
         console.log(response.data);
       }
@@ -46,7 +43,7 @@ export default function AssessmentPage() {
   useEffect(() => {
     handleAssessment();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [problem]);
 
   return (
     <div className="h-screen w-screen bg-base-100 font-my-font">
@@ -67,12 +64,16 @@ export default function AssessmentPage() {
       {/* code editor div will come here */}
       <div className="h-full mx-4 md:mx-12 lg:mx-24 xl:48">
         <div className="h-full w-full font-my-font">
-          <Editor
-            defaultLanguage="javascript"
-            defaultValue={`// ${problem}`}
-            width={"100%"}
-            onChange={handleEditorChange}
-          />
+          {problem === "" ? (
+            <span className="loading loading-spinner loading-md"></span>
+          ) : (
+            <Editor
+              defaultLanguage="javascript"
+              defaultValue={`// ${problem}`}
+              width={"100%"}
+              onChange={handleEditorChange}
+            />
+          )}
         </div>
       </div>
     </div>

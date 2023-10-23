@@ -1,6 +1,7 @@
 import { create } from "zustand";
 
 interface AuthStore {
+  currentPage: number
   loading: boolean
   isAuth: boolean;
   user: {
@@ -20,10 +21,13 @@ interface AuthStore {
   setCode: (code: string) => void
 
   setLoading: (loading: boolean)=> void
+
+  setCurrentPage: (currentPage: number)=> void
 }
 
 const useAuthStore = create<AuthStore>((set) => ({
   isAuth: !!localStorage.getItem('jwtToken'),
+  currentPage: 0,
   user: null,
   loading: false,
   code :"",
@@ -41,7 +45,9 @@ const useAuthStore = create<AuthStore>((set) => ({
 
   setCode: (code) => set({code}),
 
-  setLoading: (loading:boolean) => set({loading})
+  setLoading: (loading:boolean) => set({loading}),
+
+  setCurrentPage: (currentPage: number) => set({currentPage})
 }));
 
 
