@@ -1,6 +1,6 @@
 export default function TableComp() {
   return (
-    <div className="overflow-x-auto h-full w-full">
+    <div className="overflow-x-scroll h-full w-full">
       <table className="table table-zebra">
         {/* head */}
         <thead>
