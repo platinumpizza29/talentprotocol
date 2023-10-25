@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function JobListingComp() {
+  const url: string = "http://43.205.134.124:5000";
   const [homePage, setHomePage] = useState([]);
   const navigate = useNavigate();
 
@@ -10,9 +11,7 @@ export default function JobListingComp() {
     const userDetails = localStorage.getItem("user_details");
     const user = JSON.parse(userDetails!);
     const userEmail = user["email"];
-    const response = await axios.get(
-      `http://192.168.1.75:5000/v1/candidate/${userEmail}/home`
-    );
+    const response = await axios.get(`${url}/v1/candidate/${userEmail}/home`);
     if (response.status === 200) {
       setHomePage(response.data["job_openings"]);
     }
@@ -22,18 +21,15 @@ export default function JobListingComp() {
     getJobListing();
   }, []);
   return (
-    <div className="h-full w-full">
+    <div className="h-full w-full overflow-y-auto">
       <h1 className="m-4">Discover</h1>
       <div className="h-full w-full p-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {homePage && homePage.length > 0 ? (
           homePage.map((item, index) => (
             <div
-              className="card card-compact max-w-96 h-96 m-4 bg-base-100 shadow-xl md:w-full"
+              className="card card-compact max-w-96 max-h-60 border-2 border-base-300 m-4 bg-base-100 shadow-xl md:w-full"
               key={index}
             >
-              <figure>
-                <img src="nike.jpeg" alt="Shoes" />
-              </figure>
               <div className="card-body">
                 <h2 className="card-title">{item["org_name"]}</h2>
                 <p>{item["opening_name"]}</p>

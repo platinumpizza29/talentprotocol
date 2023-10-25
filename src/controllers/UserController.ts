@@ -6,7 +6,7 @@ export const useLogin = () => {
   const { login, setUser } = useAuthStore();
 
   const handleLogin = async (email: string, password: string) => {
-    const url:string = "http://192.168.1.75:5000";
+    const url:string = "http://43.205.134.124:5000";
     try {
       const response = await axios.post(`${url}/login`, {
         'email': email,

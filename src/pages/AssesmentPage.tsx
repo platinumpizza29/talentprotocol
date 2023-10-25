@@ -62,19 +62,25 @@ export default function AssessmentPage() {
         </div>
       </div>
       {/* code editor div will come here */}
-      <div className="h-full mx-4 md:mx-12 lg:mx-24 xl:48">
-        <div className="h-full w-full font-my-font">
-          {problem === "" ? (
-            <span className="loading loading-spinner loading-md"></span>
-          ) : (
-            <Editor
-              defaultLanguage="javascript"
-              defaultValue={`// ${problem}`}
-              width={"100%"}
-              onChange={handleEditorChange}
-            />
-          )}
-        </div>
+      <div className="">
+        {problem === "" ? (
+          <span className="loading loading-spinner loading-md"></span>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2">
+            <div className="col-span-1 w-1/3 p-4 bg-red-50">
+              <span>Problem Statement</span>
+              {problem}
+            </div>
+            <div className="col-span-1 w-2/3">
+              <Editor
+                defaultLanguage="javascript"
+                defaultValue={`// ${problem}`}
+                // width={"90vw"}
+                onChange={handleEditorChange}
+              />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

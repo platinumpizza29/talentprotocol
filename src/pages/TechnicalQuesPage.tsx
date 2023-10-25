@@ -1,14 +1,14 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useAuthStore from "../zustandStore/store";
 import { useTestController } from "../controllers/AssessmentController";
-
 export default function TechnicalQuesPage() {
   const location = useLocation();
   const data = location.state || {};
   const { handleTestSubmit } = useTestController();
 
   const code = useAuthStore((state) => state.code);
+  const navigate = useNavigate();
   const [codeAnalysisQues, setCodeAnalysisQues] = useState([]);
   const [techQues, setTechQues] = useState([]);
   const [openingId, setOpeningId] = useState("");
@@ -42,10 +42,12 @@ export default function TechnicalQuesPage() {
   };
 
   const handleSubmitAnswers = async () => {
+    const url: string | undefined = process.env.REACT_APP_API_URL;
     const data = localStorage.getItem("user_details");
     const decoded = JSON.parse(data!);
     const email = decoded["email"];
-    const res = handleTestSubmit(
+    const res = await handleTestSubmit(
+      url,
       email,
       openingId,
       assignmentId,
@@ -53,7 +55,15 @@ export default function TechnicalQuesPage() {
       codeAnalysisAnswers,
       techAnswers
     );
-    console.log(res);
+    if (res === "ok") {
+      navigate("/home");
+    } else {
+      <div className="toast">
+        <div className="alert alert-info">
+          <span>Error while Submitting!</span>
+        </div>
+      </div>;
+    }
   };
 
   useEffect(() => {

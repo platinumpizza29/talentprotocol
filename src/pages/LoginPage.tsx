@@ -20,8 +20,8 @@ export default function LoginPage() {
   const handleSubmit = async () => {
     try {
       const res = await handleLogin(email, password);
+      setLoading(true);
       if (res === "ok") {
-        setLoading(true);
         navigate("/home");
       } else if (res === "error") {
         console.log("error");

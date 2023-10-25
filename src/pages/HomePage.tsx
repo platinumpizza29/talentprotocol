@@ -69,6 +69,7 @@ export default function HomePage() {
             <a className="btn btn-ghost normal-case text-2xl font-my-font-bold">
               Talent Protocol
             </a>
+            <div className="divider"></div>
             <li>
               <a
                 className="flex flex-row justify-between items-center"
