@@ -1,4 +1,12 @@
-import { BiMenuAltLeft, BiCaretRight, BiFilterAlt } from "react-icons/bi";
+import {
+  BiMenuAltLeft,
+  BiCaretRight,
+  BiFilterAlt,
+  BiSolidBookmarkAlt,
+} from "react-icons/bi";
+import { BsFillPatchCheckFill } from "react-icons/bs";
+import { HiSquares2X2 } from "react-icons/hi2";
+import { PiSuitcaseSimpleFill } from "react-icons/pi";
 import useAuthStore from "../zustandStore/store";
 import JobListingComp from "../components/JobListingComp";
 import DashboardComp from "../components/DashboardComp";
@@ -75,6 +83,7 @@ export default function HomePage() {
                 className="flex flex-row justify-between items-center"
                 onClick={() => setCurrentPage(0)}
               >
+                <HiSquares2X2 />
                 DashBoard <BiCaretRight className="text-lg" />
               </a>
             </li>
@@ -83,6 +92,7 @@ export default function HomePage() {
                 className="flex flex-row justify-between items-center"
                 onClick={() => setCurrentPage(1)}
               >
+                <PiSuitcaseSimpleFill />
                 Job Listing <BiCaretRight className="text-lg" />
               </a>
             </li>
@@ -111,11 +121,13 @@ export default function HomePage() {
             </li>
             <li className="">
               <a className="flex flex-row justify-between items-center">
+                <BsFillPatchCheckFill />
                 Applied Jobs <BiCaretRight className="text-lg" />
               </a>
             </li>
             <li>
               <a className="flex flex-row justify-between items-center">
+                <BiSolidBookmarkAlt />
                 Saved Jobs <BiCaretRight className="text-lg" />
               </a>
             </li>

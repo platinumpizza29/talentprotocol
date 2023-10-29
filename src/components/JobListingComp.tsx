@@ -23,11 +23,12 @@ export default function JobListingComp() {
   return (
     <div className="h-full w-full overflow-y-auto">
       <h1 className="m-4">Discover</h1>
-      <div className="h-full w-full p-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      {/* <div className="h-full w-full p-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"> */}
+      <div className="m-4">
         {homePage && homePage.length > 0 ? (
           homePage.map((item, index) => (
             <div
-              className="card card-compact max-w-96 max-h-60 border-2 border-base-300 m-4 bg-base-100 shadow-xl md:w-full"
+              className="card card-compact w-full border-2 border-base-300 bg-base-100 shadow-xl"
               key={index}
             >
               <div className="card-body">
@@ -50,7 +51,7 @@ export default function JobListingComp() {
                     className="btn btn-primary"
                     onClick={() =>
                       navigate("/test", {
-                        state: { item: JSON.stringify(item) },
+                        state: { item: JSON.stringify(item["assignment"]) },
                       })
                     }
                   >

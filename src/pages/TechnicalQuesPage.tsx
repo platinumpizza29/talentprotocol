@@ -43,8 +43,8 @@ export default function TechnicalQuesPage() {
 
   const handleSubmitAnswers = async () => {
     const url: string | undefined = process.env.REACT_APP_API_URL;
-    const data = localStorage.getItem("user_details");
-    const decoded = JSON.parse(data!);
+    const data1 = localStorage.getItem("user_details");
+    const decoded = JSON.parse(data1!);
     const email = decoded["email"];
     const res = await handleTestSubmit(
       url,
@@ -67,11 +67,12 @@ export default function TechnicalQuesPage() {
   };
 
   useEffect(() => {
-    setCodeAnalysisQues(data.data["assignment"]["code_analysis_questions"]);
-    setTechQues(data.data["assignment"]["technical_questions"]);
-    setAssignmentId(data.data["assignment"]["_id"]);
-    setOpeningId(data.data["assignment"]["opening_id"]);
-  }, [data.data]);
+    const data2 = JSON.parse(data);
+    setCodeAnalysisQues(data2["assignment"]["code_analysis_questions"]);
+    setTechQues(data2["assignment"]["technical_questions"]);
+    setAssignmentId(data2["assignment"]["_id"]);
+    setOpeningId(data2["assignment"]["opening_id"]);
+  }, [data]);
 
   return (
     <div className="h-screen w-screen">

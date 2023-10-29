@@ -1,48 +1,40 @@
 import TableComp from "./TableComp";
-import BarChartComp from "./LineChartComp";
 import StatComp from "./StatComp";
+import CalenderView from "./CalenderView";
+import animationData from "../assets/welcome.json";
+import { useEffect, useState } from "react";
+import Lottie from "lottie-react";
 
 export default function DashboardComp() {
+  const [name, setName] = useState("");
+
+  useEffect(() => {
+    const data = localStorage.getItem("user_details");
+    const decodedUser = JSON.parse(data!);
+    setName(decodedUser["full_name"]);
+  }, []);
+
   return (
-    <div className="h-full w-full font-my-font">
+    <div className="h-full w-full font-my-font p-4">
       {/* \navbar starts here */}
       {/* stat cards start here */}
-      <h1 className="m-4">Dashboard</h1>
-      <div className="w-full max-h-full flex flex-row justify-evenly flex-wrap">
-        <StatComp />
-      </div>
-      {/* graph div starts here */}
-      <div className="w-full mt-20 grid grid-cols-1 md:grid-cols-2">
-        <div className="h-96 p-8">
-          <div className="card w-full h-full bg-base-100 shadow-xl border-2 border-primary-focus">
-            <div className="card-body">
-              <h2 className="card-title">Chart Goes here</h2>
-              <BarChartComp />
-            </div>
-          </div>
+      <div className="w-full max-h-full flex flex-col bg-purple-500 flex-wrap p-4 rounded-xl justify-evenly items-center md:flex-row">
+        <div className="h-60 w-60">
+          <Lottie animationData={animationData} />
         </div>
-        <div className="p-8">
-          <div className="card w-full h-full bg-base-100 shadow-xl border-2 border-primary-focus">
-            <div className="card-body">
-              <h2 className="card-title">My Tasks</h2>
-              <ul className="menu bg-base-200 w-full h-full rounded-box">
-                <li>
-                  <a>Item 1</a>
-                </li>
-                <li>
-                  <a>Item 2</a>
-                </li>
-                <li>
-                  <a>Item 3</a>
-                </li>
-              </ul>
-            </div>
-          </div>
+        <div className="">
+          <h1 className="m-4 text-base-300">Hello {name},</h1>
+          <StatComp />
         </div>
       </div>
       {/* table comp div */}
-      <div className="mt-10 ">
-        <TableComp />
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div className="mt-10 ">
+          <TableComp />
+        </div>
+        <div className="h-96 w-full overflow-auto p-4">
+          <CalenderView />
+        </div>
       </div>
       <footer className="footer footer-center p-4 bg-base-300 text-base-content mt-10">
         <aside>

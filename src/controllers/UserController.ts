@@ -9,7 +9,7 @@ export const useLogin = () => {
     const url:string = "http://43.205.134.124:5000";
     try {
       const response = await axios.post(`${url}/login`, {
-        'email': email,
+        'email': email.toLowerCase(),
         'password': password
       });
 
@@ -27,7 +27,7 @@ export const useLogin = () => {
   };
 
   const handleRegistration = async (full_name: string, email:string, password:string, age:string) =>{
-    const url = "http://192.168.1.75:5000";
+    const url = "http://43.205.134.124:5000/signup";
     try {
       const response = await axios.post(`${url}/signup`, {
         "full_name": full_name,
