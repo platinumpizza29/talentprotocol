@@ -123,7 +123,7 @@ export default function TechnicalQuesPage() {
 
       {isOpen && document.getElementById("my_modal_1")!.showModal()}
       <dialog id="my_modal_1" className="modal">
-        <div className="bg-transparent">
+        <div className="modal-box bg-transparent">
           <p className="py-4">
             {isOpen === true ? (
               <Lottie

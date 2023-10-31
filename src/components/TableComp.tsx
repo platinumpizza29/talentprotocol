@@ -1,4 +1,40 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+
 export default function TableComp() {
+  const status: Record<number, string> = {
+    0: "In Progress",
+    1: "Closed",
+    2: "Under AI Evaluation",
+    3: "AI Evaluation Ready",
+    4: "Accepted",
+  };
+
+  const progress: Record<number, number> = {
+    0: 25,
+    1: 100,
+    2: 50,
+    3: 75,
+    4: 100,
+  };
+
+  const [data, setData] = useState([]);
+
+  const handleUserAppliedJobs = async (email: string) => {
+    const url = `http://13.233.90.241:5000/v1/candidate/${email}/applied`;
+    const response = await axios.get(url);
+    if (response.status === 200) {
+      setData(response.data["applied"]);
+    }
+  };
+
+  useEffect(() => {
+    const data = localStorage.getItem("user_details");
+    const user = JSON.parse(data!);
+    const email = user["email"];
+    handleUserAppliedJobs(email);
+  }, []);
+
   return (
     <div className="overflow-x-scroll h-full w-full">
       <table className="table-lg table-zebra">
@@ -14,47 +50,48 @@ export default function TableComp() {
         </thead>
         <tbody>
           {/* row 1 */}
-          <tr>
-            <th>1</th>
-            <td>Cy Ganderton</td>
-            <td>Quality Control Specialist</td>
-            <td>Under AI Evaluation</td>
-            <td>
-              <progress
-                className="progress progress-secondary w-56"
-                value="70"
-                max="100"
-              ></progress>
-            </td>
-          </tr>
-          {/* row 2 */}
-          <tr>
-            <th>2</th>
-            <td>Hart Hagerty</td>
-            <td>Desktop Support Technician</td>
-            <td>Active</td>
-            <td>
-              <progress
-                className="progress progress-secondary w-56"
-                value="30"
-                max="100"
-              ></progress>
-            </td>
-          </tr>
-          {/* row 3 */}
-          <tr>
-            <th>3</th>
-            <td>Brice Swyre</td>
-            <td>Tax Accountant</td>
-            <td>Open</td>
-            <td>
-              <progress
-                className="progress progress-secondary w-56"
-                value="20"
-                max="100"
-              ></progress>
-            </td>
-          </tr>
+          {data && data.length > 0 ? (
+            data.map((item, index) => {
+              // Check if the required properties exist in the item object
+              if (
+                item &&
+                item["Opening"] &&
+                item["Opening"]["org_name"] &&
+                item["Opening"]["opening_name"] &&
+                item["Application"] &&
+                item["Application"]["status"] !== undefined &&
+                status[item["Application"]["status"]] !== undefined &&
+                progress[item["Application"]["status"]] !== undefined
+              ) {
+                return (
+                  <tr key={index}>
+                    <th>{index}</th>
+                    <td>{item["Opening"]["org_name"]}</td>
+                    <td>{item["Opening"]["opening_name"]}</td>
+                    <td>{status[item["Application"]["status"]]}</td>
+                    <td>
+                      <progress
+                        className="progress progress-secondary w-56"
+                        value={progress[item["Application"]["status"]]}
+                        max="100"
+                      ></progress>
+                    </td>
+                  </tr>
+                );
+              } else {
+                // Handle the case where the required properties are missing or undefined
+                return (
+                  <tr key={index}>
+                    <td>Invalid data for row {index}</td>
+                  </tr>
+                );
+              }
+            })
+          ) : (
+            <tr>
+              <td>No data available</td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>
