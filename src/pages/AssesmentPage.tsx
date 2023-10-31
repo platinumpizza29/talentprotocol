@@ -15,7 +15,7 @@ export default function AssessmentPage() {
   const handleAssessment = async () => {
     try {
       const decode = JSON.parse(item);
-      setProblem(decode["code_problem_statement"]);
+      setProblem(decode["assignment"]["code_problem_statement"]);
     } catch (error) {
       console.log(error);
     }
@@ -49,9 +49,7 @@ export default function AssessmentPage() {
         <div className="navbar-end">
           <a
             className="btn btn-accent btn-outline"
-            onClick={() =>
-              navigate("/techques", { state: { data: JSON.stringify(item) } })
-            }
+            onClick={() => navigate("/techques", { state: { data: item } })}
           >
             Next
           </a>
@@ -74,7 +72,7 @@ export default function AssessmentPage() {
                 tabIndex={0}
                 className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
               >
-                <li onClick={() => handleSetLang("javaScript")}>
+                <li onClick={() => handleSetLang("javascript")}>
                   <a>JavaScript</a>
                 </li>
                 <li onClick={() => handleSetLang("go")}>

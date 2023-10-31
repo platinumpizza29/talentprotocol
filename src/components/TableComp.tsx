@@ -1,7 +1,7 @@
 export default function TableComp() {
   return (
     <div className="overflow-x-scroll h-full w-full">
-      <table className="table-xs table-zebra">
+      <table className="table-lg table-zebra">
         {/* head */}
         <thead>
           <tr>

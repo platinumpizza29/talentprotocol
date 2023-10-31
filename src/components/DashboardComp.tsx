@@ -28,15 +28,15 @@ export default function DashboardComp() {
         </div>
       </div>
       {/* table comp div */}
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        <div className="mt-10 ">
+      <div className="max-h-full grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div className="mt-10">
           <TableComp />
         </div>
-        <div className="h-96 w-full overflow-auto p-4">
+        <div className="w-full overflow-auto p-4">
           <CalenderView />
         </div>
       </div>
-      <footer className="footer footer-center p-4 bg-base-300 text-base-content mt-10">
+      <footer className="footer footer-center p-4 bg-base-300 text-base-content mt-10 w-full">
         <aside>
           <p>Copyright © 2023 - All right reserved by ACME Industries Ltd</p>
         </aside>

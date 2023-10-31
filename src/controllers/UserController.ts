@@ -6,7 +6,7 @@ export const useLogin = () => {
   const { login, setUser } = useAuthStore();
 
   const handleLogin = async (email: string, password: string) => {
-    const url:string = "http://43.205.134.124:5000";
+    const url:string = "http://13.233.90.241:5000";
     try {
       const response = await axios.post(`${url}/login`, {
         'email': email.toLowerCase(),
@@ -27,7 +27,7 @@ export const useLogin = () => {
   };
 
   const handleRegistration = async (full_name: string, email:string, password:string, age:string) =>{
-    const url = "http://43.205.134.124:5000/signup";
+    const url = "http://13.233.90.241:5000";
     try {
       const response = await axios.post(`${url}/signup`, {
         "full_name": full_name,

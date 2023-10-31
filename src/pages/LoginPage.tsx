@@ -78,7 +78,12 @@ export default function LoginPage() {
             {/* other */}
             <div className="flex flex-row justify-between items-center mt-6">
               <button className="btn btn-ghost">Forgot password?</button>
-              <button className="btn btn-ghost">New User?</button>
+              <button
+                className="btn btn-ghost"
+                onClick={() => navigate("/register")}
+              >
+                New User?
+              </button>
             </div>
             <button
               className="btn btn-block btn-primary mt-4"

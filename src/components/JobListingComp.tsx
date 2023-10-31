@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function JobListingComp() {
-  const url: string = "http://43.205.134.124:5000";
+  const url: string = "http://13.233.90.241:5000";
   const [homePage, setHomePage] = useState([]);
   const navigate = useNavigate();
 
@@ -51,7 +51,7 @@ export default function JobListingComp() {
                     className="btn btn-primary"
                     onClick={() =>
                       navigate("/test", {
-                        state: { item: JSON.stringify(item["assignment"]) },
+                        state: { item: JSON.stringify(item) },
                       })
                     }
                   >

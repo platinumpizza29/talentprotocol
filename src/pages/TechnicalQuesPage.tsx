@@ -1,24 +1,25 @@
-import { ChangeEvent, useEffect, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuthStore from "../zustandStore/store";
 import { useTestController } from "../controllers/AssessmentController";
+import Lottie, { LottieRefCurrentProps } from "lottie-react";
+import animationData from "../assets/done.json";
+
 export default function TechnicalQuesPage() {
   const location = useLocation();
-  const data = location.state || {};
+  const { data } = location.state || {};
   const { handleTestSubmit } = useTestController();
 
+  const doneRef = useRef<LottieRefCurrentProps>(null);
   const code = useAuthStore((state) => state.code);
   const navigate = useNavigate();
-  const [codeAnalysisQues, setCodeAnalysisQues] = useState([]);
-  const [techQues, setTechQues] = useState([]);
-  const [openingId, setOpeningId] = useState("");
+  const [codeAnalysisQues, setCodeAnalysisQues] = useState([""]);
+  const [techQues, setTechQues] = useState([""]);
   const [assignmentId, setAssignmentId] = useState("");
-  const [techAnswers, setTechAnswers] = useState(
-    Array(techQues.length).fill("")
-  );
-  const [codeAnalysisAnswers, setCodeAnalysisAnswers] = useState(
-    Array(codeAnalysisQues.length).fill("")
-  );
+  const [techAnswers, setTechAnswers] = useState([""]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [codeAnalysisAnswers, setCodeAnalysisAnswers] = useState([""]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleInputChange = (
@@ -42,36 +43,32 @@ export default function TechnicalQuesPage() {
   };
 
   const handleSubmitAnswers = async () => {
-    const url: string | undefined = process.env.REACT_APP_API_URL;
+    const url: string | undefined = "http://13.233.90.241:5000";
     const data1 = localStorage.getItem("user_details");
     const decoded = JSON.parse(data1!);
     const email = decoded["email"];
     const res = await handleTestSubmit(
       url,
       email,
-      openingId,
       assignmentId,
       code,
       codeAnalysisAnswers,
       techAnswers
     );
     if (res === "ok") {
-      navigate("/home");
+      setIsOpen(true);
     } else {
-      <div className="toast">
-        <div className="alert alert-info">
-          <span>Error while Submitting!</span>
-        </div>
-      </div>;
+      setIsOpen(false);
     }
   };
 
   useEffect(() => {
     const data2 = JSON.parse(data);
+    // const data2 = data;
+
     setCodeAnalysisQues(data2["assignment"]["code_analysis_questions"]);
     setTechQues(data2["assignment"]["technical_questions"]);
-    setAssignmentId(data2["assignment"]["_id"]);
-    setOpeningId(data2["assignment"]["opening_id"]);
+    setAssignmentId(data2._id);
   }, [data]);
 
   return (
@@ -93,28 +90,58 @@ export default function TechnicalQuesPage() {
       </div>
       <div className="mx-4 md:mx-12 lg:mx-24 xl:mx-48">
         <h1>Code Analysis Questions</h1>
-        {codeAnalysisQues.map((item, index) => (
-          <div key={index} className="flex flex-col m-10">
-            <span className="text-xl">{item}</span>
-            <textarea
-              className="textarea textarea-primary"
-              placeholder="Answer"
-              onChange={(e) => handleInputChange(e, index)}
-            ></textarea>
-          </div>
-        ))}
+        {codeAnalysisQues && codeAnalysisQues.length > 0 ? (
+          codeAnalysisQues.map((item, index) => (
+            <div key={index} className="flex flex-col m-10">
+              <span className="text-xl">{item}</span>
+              <textarea
+                className="textarea textarea-primary"
+                placeholder="Answer"
+                onChange={(e) => handleInputChange(e, index)}
+              ></textarea>
+            </div>
+          ))
+        ) : (
+          <p>Loading code analysis questions...</p>
+        )}
         <h1>Technical Questions</h1>
-        {techQues.map((item, index) => (
-          <div className="flex flex-col m-10">
-            <p>{item}</p>
-            <textarea
-              className="textarea textarea-primary"
-              placeholder="Answer"
-              onChange={(e) => handleInputChangeTech(e, index)}
-            ></textarea>
-          </div>
-        ))}
+        {techQues && techQues.length > 0 ? (
+          techQues.map((item, index) => (
+            <div key={index} className="flex flex-col m-10">
+              <p>{item}</p>
+              <textarea
+                className="textarea textarea-primary"
+                placeholder="Answer"
+                onChange={(e) => handleInputChangeTech(e, index)}
+              ></textarea>
+            </div>
+          ))
+        ) : (
+          <p>Loading technical questions...</p>
+        )}
       </div>
+
+      {isOpen && document.getElementById("my_modal_1")!.showModal()}
+      <dialog id="my_modal_1" className="modal">
+        <div className="bg-transparent">
+          <p className="py-4">
+            {isOpen === true ? (
+              <Lottie
+                animationData={animationData}
+                lottieRef={doneRef}
+                loop={false}
+                onComplete={() => {
+                  console.log("animation completed");
+
+                  navigate("/home");
+                }}
+              />
+            ) : (
+              ""
+            )}
+          </p>
+        </div>
+      </dialog>
     </div>
   );
 }

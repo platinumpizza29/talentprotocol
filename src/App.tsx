@@ -6,6 +6,7 @@ import AssessmentPage from "./pages/AssesmentPage";
 import LandingPage from "./pages/LandingPage";
 import PrivateRoutes from "./utils/PrivateRoutes";
 import TechnicalQuesPage from "./pages/TechnicalQuesPage";
+import ApplicationDetails from "./components/ApplicationDetailsComp";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/home" element={<HomePage />} />
           <Route path="/test" element={<AssessmentPage />} />
           <Route path="/techques" element={<TechnicalQuesPage />} />
+          <Route path="/home/:id" element={<ApplicationDetails />} />
         </Route>
       </Routes>
     </Router>

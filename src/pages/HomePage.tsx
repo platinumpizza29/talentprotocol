@@ -10,6 +10,7 @@ import { PiSuitcaseSimpleFill } from "react-icons/pi";
 import useAuthStore from "../zustandStore/store";
 import JobListingComp from "../components/JobListingComp";
 import DashboardComp from "../components/DashboardComp";
+import AppliedJobs from "../components/AppliedJobsComp";
 
 export default function HomePage() {
   const logout = useAuthStore((state) => state.logout);
@@ -19,8 +20,10 @@ export default function HomePage() {
   const MyComp = () => {
     if (currentPage === 0) {
       return <DashboardComp />;
-    } else {
+    } else if (currentPage === 1) {
       return <JobListingComp />;
+    } else {
+      return <AppliedJobs />;
     }
   };
 
@@ -120,7 +123,10 @@ export default function HomePage() {
               </ul>
             </li>
             <li className="">
-              <a className="flex flex-row justify-between items-center">
+              <a
+                className="flex flex-row justify-between items-center"
+                onClick={() => setCurrentPage(2)}
+              >
                 <BsFillPatchCheckFill />
                 Applied Jobs <BiCaretRight className="text-lg" />
               </a>
