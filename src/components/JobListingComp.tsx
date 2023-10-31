@@ -1,12 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+// import useAuthStore from "../zustandStore/store";
 
 export default function JobListingComp() {
   const url: string = "http://13.233.90.241:5000";
+  // const search = useAuthStore((state) => state.search);
   const [homePage, setHomePage] = useState([]);
   const navigate = useNavigate();
-
   const getJobListing = async () => {
     const userDetails = localStorage.getItem("user_details");
     const user = JSON.parse(userDetails!);
@@ -28,7 +29,7 @@ export default function JobListingComp() {
         {homePage && homePage.length > 0 ? (
           homePage.map((item, index) => (
             <div
-              className="card card-compact w-full border-2 border-base-300 bg-base-100 shadow-xl"
+              className="card card-compact w-full border-2 border-base-300 bg-base-100 shadow-xl mb-4"
               key={index}
             >
               <div className="card-body">

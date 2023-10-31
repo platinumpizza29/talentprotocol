@@ -61,7 +61,7 @@ export default function AssessmentPage() {
           <span className="loading loading-spinner loading-md"></span>
         </div>
       ) : (
-        <div className="flex flex-col h-full md:flex-row grid-cols-2">
+        <div className="flex flex-col w-full h-full md:flex-row grid-cols-2">
           <div className="col-span-1 p-4 border-2 md:w-1/3">
             <div className="dropdown dropdown-end mt-8 flex flex-row justify-between items-center">
               <p className="font-bold">Problem Statement</p>
@@ -88,10 +88,10 @@ export default function AssessmentPage() {
               <li>{problem}</li>
             </ol>
           </div>
-          <div className="col-span-1 md:w-2/3">
+          <div className=" h-full col-span-1 md:w-2/3">
             <Editor
-              defaultLanguage={lang}
-              defaultValue={`//`}
+              defaultLanguage={lang === "" ? "javascript" : lang}
+              defaultValue={`//Lets write some broken code 😈`}
               onChange={handleEditorChange}
             />
           </div>
