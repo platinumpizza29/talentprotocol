@@ -3,6 +3,8 @@ import { DiGithubAlt } from "react-icons/di";
 import { useLogin } from "../controllers/UserController";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import animationData from "../assets/register.json";
+import Lottie from "lottie-react";
 
 export default function RegisterPage() {
   const navigate = useNavigate();
@@ -57,8 +59,12 @@ export default function RegisterPage() {
   return (
     // register page main div
     <div className="h-screen w-screen grid grid-cols-1 md:grid-cols-2 p-6">
-      <div className="hidden md:block bg-red-50 rounded-xl">
-        {/* image to handled later */}1
+      <div
+        className="hidden md:flex rounded-2xl items-center justify-center"
+        style={{ width: "80%", height: "80%", objectFit: "cover" }}
+      >
+        {/* image to be handled later */}
+        <Lottie animationData={animationData} height={"100%"} width={"100%"} />
       </div>
       <div className="">
         <div className="h-full w-full flex items-center p-4">

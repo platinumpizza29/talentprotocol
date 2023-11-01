@@ -41,7 +41,6 @@ export default function TableComp() {
         {/* head */}
         <thead>
           <tr>
-            <th></th>
             <th>Company Name</th>
             <th>Position</th>
             <th>Status</th>
@@ -65,7 +64,6 @@ export default function TableComp() {
               ) {
                 return (
                   <tr key={index}>
-                    <th>{index}</th>
                     <td>{item["Opening"]["org_name"]}</td>
                     <td>{item["Opening"]["opening_name"]}</td>
                     <td>{status[item["Application"]["status"]]}</td>

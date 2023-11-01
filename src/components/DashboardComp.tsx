@@ -38,7 +38,7 @@ export default function DashboardComp() {
       </div>
       <footer className="footer footer-center p-4 bg-base-300 text-base-content mt-10 w-full">
         <aside>
-          <p>Copyright © 2023 - All right reserved by ACME Industries Ltd</p>
+          <p>Copyright © 2023 - All right reserved by Talent Protocol</p>
         </aside>
       </footer>
     </div>

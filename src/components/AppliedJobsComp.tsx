@@ -3,6 +3,14 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function AppliedJobs() {
+  const status: Record<number, string> = {
+    0: "In Progress",
+    1: "Closed",
+    2: "Under AI Evaluation",
+    3: "AI Evaluation Ready",
+    4: "Accepted",
+  };
+
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -57,7 +65,7 @@ export default function AppliedJobs() {
                       {item["Opening"]["opening_name"]}
                     </p>
                   </div>
-                  {item["Application"]["status"]}
+                  {status[item["Application"]["status"]]}
                 </div>
                 <p>{item["Opening"]["_id"]}</p>
                 <div className="card-actions justify-end">

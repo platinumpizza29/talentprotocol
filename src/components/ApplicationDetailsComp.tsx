@@ -18,7 +18,7 @@ export default function ApplicationDetails() {
           <div className="flex justify-evenly items-center">
             <span className="font-bold text-2xl">Rating:</span>
             <span className="font-bold text-2xl">
-              {itemData.Application.evaluation.rating}/10
+              {itemData.Application.evaluation.rating}
             </span>
           </div>
         </div>

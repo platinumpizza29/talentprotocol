@@ -62,15 +62,6 @@ export default function TechnicalQuesPage() {
     }
   };
 
-  // const handleModalOpen = () => {
-  //   const modal: HTMLDialogElement | null = document.getElementById(
-  //     "my_modal_1"
-  //   ) as HTMLDialogElement;
-  //   if (modal) {
-  //     modal.showModal();
-  //   }
-  // };
-
   useEffect(() => {
     const data2 = JSON.parse(data);
     // const data2 = data;
@@ -130,28 +121,27 @@ export default function TechnicalQuesPage() {
         )}
       </div>
 
-      {isOpen && (
-        <dialog id="my_modal_1" className="modal">
-          <div className="bg-transparent">
-            <p className="py-4">
-              {isOpen === true ? (
-                <Lottie
-                  animationData={animationData}
-                  lottieRef={doneRef}
-                  loop={false}
-                  onComplete={() => {
-                    console.log("animation completed");
+      {isOpen && document.getElementById("my_modal_1")!.showModal()}
+      <dialog id="my_modal_1" className="modal">
+        <div className="bg-transparent">
+          <p className="py-4">
+            {isOpen === true ? (
+              <Lottie
+                animationData={animationData}
+                lottieRef={doneRef}
+                loop={false}
+                onComplete={() => {
+                  console.log("animation completed");
 
-                    navigate("/home");
-                  }}
-                />
-              ) : (
-                ""
-              )}
-            </p>
-          </div>
-        </dialog>
-      )}
+                  navigate("/home");
+                }}
+              />
+            ) : (
+              ""
+            )}
+          </p>
+        </div>
+      </dialog>
     </div>
   );
 }

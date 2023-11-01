@@ -9,7 +9,6 @@ export default function AssessmentPage() {
   const navigate = useNavigate();
   const [problem, setProblem] = useState("");
   const [lang, setLang] = useState("");
-  const [code, setCode] = useState("");
   const codeStore = useAuthStore((state) => state.setCode);
 
   const handleAssessment = async () => {
@@ -23,10 +22,8 @@ export default function AssessmentPage() {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function handleEditorChange(value: any, event: any) {
-    setCode(value);
+    codeStore(value);
     console.log(value);
-
-    codeStore(code);
     console.log(event);
   }
 
@@ -91,7 +88,6 @@ export default function AssessmentPage() {
           <div className=" h-full col-span-1 md:w-2/3">
             <Editor
               defaultLanguage={lang === "" ? "javascript" : lang}
-              defaultValue={`//Lets write some broken code 😈`}
               onChange={handleEditorChange}
             />
           </div>
