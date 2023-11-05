@@ -46,7 +46,7 @@ export default function TechnicalQuesPage() {
   };
 
   const handleSubmitAnswers = async () => {
-    const url: string | undefined = "http://13.233.90.241:5000";
+    const url: string | undefined = "http://localhost:5000";
     const data1 = localStorage.getItem("user_details");
     const decoded = JSON.parse(data1!);
     const email = decoded["email"];
