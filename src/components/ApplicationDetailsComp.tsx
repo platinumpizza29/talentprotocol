@@ -10,10 +10,10 @@ export default function ApplicationDetails() {
   }
 
   return (
-    <div className="h-screen w-screen">
+    <div className="h-screen w-screen bg-base-200 font-my-font">
       {/* Render other properties from itemData as needed */}
-      <div className="p-8">
-        <div className="w-full h-40 flex justify-between items-center border-2 border-primary rounded-2xl shadow-lg p-8">
+      <div className="m-4 md:mx-12 lg:mx-24 xl:mx-48 p-8">
+        <div className="w-full h-40 flex justify-between items-center p-8">
           <span className="text-4xl">Application Overview</span>
           <div className="flex justify-evenly items-center">
             <span className="font-bold text-2xl">Rating:</span>
@@ -22,31 +22,20 @@ export default function ApplicationDetails() {
             </span>
           </div>
         </div>
+
         {/* grid starts here */}
-        <div className="grid grid-cols-1 md:grid-cols-2 place-items-center mt-10">
+        <div className="h-full w-full mt-10">
+          <span className="font-bold text-2xl">Code Analysis</span>
+          <div className="divider"></div>
           <div className="">
-            <h1>Code Analysis</h1>
-          </div>
-          <div className="mockup-browser bg-primary border">
-            <div className="mockup-browser-toolbar">
-              <div className="input">Code Analysis</div>
-            </div>
-            <div className="flex justify-center px-4 py-16 bg-primary text-base-300">
-              {itemData.Application.evaluation.code_analysis}
-            </div>
+            {itemData.Application.evaluation.code_analysis}
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 place-items-center mt-10">
+        <div className="w-full mt-10">
+          <span className="font-bold text-2xl">Technical Analysis</span>
+          <div className="divider"></div>
           <div className="">
-            <h1>Evaluation Summary</h1>
-          </div>
-          <div className="mockup-browser bg-primary border">
-            <div className="mockup-browser-toolbar">
-              <div className="input">Evaluation Summary</div>
-            </div>
-            <div className="flex flex-col-reverse justify-center px-4 py-16 bg-primary text-base-300 md:flex-row">
-              {itemData.Application.evaluation.evaluation_summary}
-            </div>
+            {itemData.Application.evaluation.evaluation_summary}
           </div>
         </div>
       </div>

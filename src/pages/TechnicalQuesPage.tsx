@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, ReactNode, useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuthStore from "../zustandStore/store";
 import { useTestController } from "../controllers/AssessmentController";
@@ -20,6 +20,9 @@ export default function TechnicalQuesPage() {
   const [techAnswers, setTechAnswers] = useState([""]);
   const [isOpen, setIsOpen] = useState(false);
   const [codeAnalysisAnswers, setCodeAnalysisAnswers] = useState([""]);
+  const modalElement = document.getElementById(
+    "my_modal_1"
+  ) as HTMLDialogElement;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleInputChange = (
@@ -121,7 +124,7 @@ export default function TechnicalQuesPage() {
         )}
       </div>
 
-      {isOpen && document.getElementById("my_modal_1")!.showModal()}
+      {isOpen && (modalElement.showModal() as ReactNode)}
       <dialog id="my_modal_1" className="modal">
         <div className="bg-transparent">
           <p className="py-4">

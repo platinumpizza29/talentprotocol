@@ -7,6 +7,8 @@ import LandingPage from "./pages/LandingPage";
 import PrivateRoutes from "./utils/PrivateRoutes";
 import TechnicalQuesPage from "./pages/TechnicalQuesPage";
 import ApplicationDetails from "./components/ApplicationDetailsComp";
+import AdminDash from "./pages/Admin/AdminDash";
+import AllOpenings from "./pages/Admin/AllOpenings";
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
           <Route path="/test" element={<AssessmentPage />} />
           <Route path="/techques" element={<TechnicalQuesPage />} />
           <Route path="/home/:id" element={<ApplicationDetails />} />
+          <Route path="/v1/org" element={<AdminDash />} />
+          <Route path="/v1/org/all_openings" element={<AllOpenings />} />
         </Route>
       </Routes>
     </Router>

@@ -6,29 +6,50 @@ import Lottie from "lottie-react";
 import animationData from "../assets/job.json";
 import { useLogin } from "../controllers/UserController";
 import useAuthStore from "../zustandStore/store";
+import { AdminController } from "../controllers/AdminController";
 
 export default function LoginPage() {
   const navigate = useNavigate();
   const setLoading = useAuthStore((state) => state.setLoading);
   const loading = useAuthStore((state) => state.loading);
+  const [selectedOption, setSelectedOption] = useState("default");
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const { handleLogin } = useLogin();
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleSelectChange = (event: { target: { value: any } }) => {
+    const selectedValue = event.target.value;
+    setSelectedOption(selectedValue);
+  };
+
   const handleSubmit = async () => {
     try {
       setLoading(true);
-      const res = await handleLogin(email, password);
-      if (res === "ok") {
-        navigate("/home");
-      } else if (res === "error") {
-        console.log("error");
-        setLoading(false);
-      } else {
-        console.log("error");
-        setLoading(false);
+      if (selectedOption === "Yes") {
+        // Navigate to a different URL when "Yes" is selected
+        const res = await AdminController().handleAdminLogin(email);
+        if (res === "ok") {
+          navigate("/v1/org");
+          setLoading(false);
+        } else {
+          console.log("error while logging in!");
+          setLoading(false);
+        }
+      } else if (selectedOption === "No") {
+        // Navigate to a different URL when "No" is selected
+        const res = await handleLogin(email, password);
+        if (res === "ok") {
+          navigate("/home");
+        } else if (res === "error") {
+          console.log("error");
+          setLoading(false);
+        } else {
+          console.log("error");
+          setLoading(false);
+        }
       }
     } catch (error) {
       console.log(error);
@@ -38,7 +59,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="h-screen w-screen grid grid-cols-1 md:grid-cols-2 p-6 m-0">
+    <div className="h-screen w-screen grid grid-cols-1 md:grid-cols-2 p-6 m-0 bg-base-200">
       <div
         className="hidden md:flex rounded-2xl items-center justify-center"
         style={{ width: "80%", height: "80%", objectFit: "cover" }}
@@ -53,6 +74,18 @@ export default function LoginPage() {
           <h1 className="font-bold">Hi welcome!</h1>
           <h3>lets get you signed in!</h3>
           <div className="form-control w-full max-w-xs">
+            {/* drop down */}
+            <select
+              className="select select-primary w-full max-w-xs mt-6"
+              value={selectedOption}
+              onChange={handleSelectChange}
+            >
+              <option value="default" disabled>
+                Are you an org?
+              </option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
             {/* email text field */}
             <label className="label">
               <span className="label-text">Email</span>

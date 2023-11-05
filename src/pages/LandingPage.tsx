@@ -8,9 +8,20 @@ import { FaSlackHash } from "react-icons/fa";
 import Lottie from "lottie-react";
 import animationData from "../assets/job.json";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
 
 export default function LandingPage() {
   const navigate = useNavigate();
+
+  const [email, setEmail] = useState("");
+
+  const handleWaitListApi = async () => {
+    const url = `http://3.108.5.175:5000/v1/candidate/${email}/waitlist/join`;
+    const response = await axios.post(url);
+    console.log(response.data);
+  };
+
   return (
     <div className="h-screen w-screen font-my-font bg-base-100 overflow-x-hidden !scroll-smooth">
       {/* navbar starts here */}
@@ -37,22 +48,30 @@ export default function LandingPage() {
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
-              <li>
+              {/* <li>
                 <a
                   className="flex flex-row justify-between items-center"
                   onClick={() => navigate("/register")}
                 >
                   Sign Up <BiCaretRight className="text-lg" />
                 </a>
-              </li>
+              </li> */}
               <li>
+                <a
+                  className="flex flex-row justify-between items-center"
+                  onClick={() => navigate("/register")}
+                >
+                  Join Waitlist <BiCaretRight className="text-lg" />
+                </a>
+              </li>
+              {/* <li>
                 <a
                   className="flex flex-row justify-between items-center"
                   onClick={() => navigate("/login")}
                 >
                   Sign In <BiCaretRight className="text-lg" />
                 </a>
-              </li>
+              </li> */}
             </ul>
           </div>
           <a className="btn btn-ghost normal-case text-2xl font-my-font-bold">
@@ -73,6 +92,17 @@ export default function LandingPage() {
             >
               Sign In
             </button>
+            {/* <button
+              className="btn btn-primary btn-outline"
+              onClick={() => {
+                const dialog = document.getElementById(
+                  "my_modal_5"
+                ) as HTMLDialogElement;
+                dialog?.showModal();
+              }}
+            >
+              Join Waitlist
+            </button> */}
           </ul>
         </div>
       </div>
@@ -106,13 +136,16 @@ export default function LandingPage() {
               Features of Talent Protocol <br />
             </span>
             <h1 className="font-bold">that you'll love</h1>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis quia
-              dignissimos quam at, nostrum, rem eligendi possimus animi illum
-              cumque blanditiis! Sint, nihil fugit. Repudiandae natus
-              perspiciatis hic quasi nobis porro doloribus? Sint magnam nisi
-              placeat earum autem, dignissimos veritatis vitae odit vel nostrum.
-              Impedit rerum eum expedita suscipit fugiat.
+            <p className="prose">
+              Talent Protocol leverages cutting-edge AI technology to facilitate
+              seamless entry into the industry. We have developed an innovative
+              system that automatically identifies students with the right
+              skills and transforms them into invaluable assets for
+              organizations, all without the need for manual interventions. Our
+              AI-powered platform ensures a frictionless onboarding process,
+              connecting skilled students with suitable organizations, thereby
+              creating a streamlined pathway for talent transformation in the
+              industry.
             </p>
           </div>
           {/* cards div */}
@@ -186,44 +219,70 @@ export default function LandingPage() {
           {/* cards start from here */}
           <div className="grid grid-cols-1 gap-8 place-items-center md:grid-cols-3 p-8">
             <div className="card w-full h-96 bg-base-100 shadow-xl md:w-96">
-              <div className="card-body">
+              <div className="card-body flex flex-col justify-evenly">
                 <div className="avatar">
                   <div className="w-24 rounded-full">
                     <img src="sailor.png" />
                   </div>
                 </div>
-                <h2 className="card-title">Sailor Plan</h2>
-                <p>If a dog chews shoes whose shoes does he choose?</p>
+                <div className="w-full flex flex-row justify-between">
+                  <h2 className="card-title">Sailor Plan</h2>
+                  <h2 className="card-title">FREE</h2>
+                </div>
+
+                <ul>
+                  <div className="divider"></div>
+                  <li>25 Jobs a Month</li>
+                  <li>AI Analysis</li>
+                </ul>
+                <div className="card-actions justify-end">
+                  <button className="btn btn-primary">Buy Now</button>
+                </div>
+              </div>
+            </div>
+            <div className="bg-base-100 card w-full h-96 shadow-xl md:w-96">
+              <div className="card-body flex flex-col justify-evenly">
+                <div className="avatar">
+                  <div className="w-24 rounded-full">
+                    <img src="voyages.png" />
+                  </div>
+                </div>
+                <div className="w-full flex flex-row justify-between">
+                  <h2 className="card-title">Voyager Plan</h2>
+                  <h2 className="card-title">INR 650/mo</h2>
+                </div>
+                <ul>
+                  <div className="divider"></div>
+                  <li>25 Jobs a Month</li>
+                  <li>AI Analysis</li>
+                  <li>Placeholder</li>
+                </ul>
                 <div className="card-actions justify-end">
                   <button className="btn btn-primary">Buy Now</button>
                 </div>
               </div>
             </div>
             <div className="bg-gradient-to-tr bg-clip-content from-purple-500 to-blue-500 card w-full h-96 shadow-xl md:w-96">
-              <div className="card-body">
-                <div className="avatar">
-                  <div className="w-24 rounded-full">
-                    <img src="voyages.png" />
-                  </div>
-                </div>
-                <h2 className="card-title">Voyager plan</h2>
-                <p>If a dog chews shoes whose shoes does he choose?</p>
-                <div className="card-actions justify-end">
-                  <button className="btn btn-accent">Buy Now</button>
-                </div>
-              </div>
-            </div>
-            <div className="card w-full h-96 bg-base-100 shadow-xl md:w-96">
-              <div className="card-body">
+              <div className="card-body flex flex-col justify-evenly text-base-100">
                 <div className="avatar">
                   <div className="w-24 rounded-full">
                     <img src="adventurer.png" />
                   </div>
                 </div>
-                <h2 className="card-title">Adventurer Plan</h2>
-                <p>If a dog chews shoes whose shoes does he choose?</p>
+                <div className="w-full flex flex-row justify-between">
+                  <h2 className="card-title">Adventurer Plan</h2>
+                  <h2 className="card-title">INR 999/mo</h2>
+                </div>
+                <ul>
+                  <div className="divider"></div>
+                  <li>25 Jobs a Month</li>
+                  <li>AI Analysis</li>
+                  <li>Placeholder</li>
+                </ul>
                 <div className="card-actions justify-end">
-                  <button className="btn btn-primary">Buy Now</button>
+                  <button className="btn text-base-100 btn-outline">
+                    Buy Now
+                  </button>
                 </div>
               </div>
             </div>
@@ -297,6 +356,31 @@ export default function LandingPage() {
           </nav>
         </footer>
       </section>
+
+      {/* Open the modal using document.getElementById('ID').showModal() method */}
+      <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">Join Waiting List</h3>
+          <input
+            type="email"
+            placeholder="Email Address"
+            onChange={(e) => setEmail(e.target.value)}
+            className="input input-bordered input-primary w-full max-w-xs mt-6"
+          />
+          <div className="modal-action">
+            <form method="dialog">
+              {/* if there is a button in form, it will close the modal */}
+              <button
+                className="btn btn-primary mr-4"
+                onClick={() => handleWaitListApi()}
+              >
+                Submit
+              </button>
+              <button className="btn">Close</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
     </div>
   );
 }

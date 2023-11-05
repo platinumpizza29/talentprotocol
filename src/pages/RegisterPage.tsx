@@ -58,7 +58,7 @@ export default function RegisterPage() {
 
   return (
     // register page main div
-    <div className="h-screen w-screen grid grid-cols-1 md:grid-cols-2 p-6">
+    <div className="h-screen w-screen grid grid-cols-1 md:grid-cols-2 p-6 bg-base-200">
       <div
         className="hidden md:flex rounded-2xl items-center justify-center"
         style={{ width: "80%", height: "80%", objectFit: "cover" }}
