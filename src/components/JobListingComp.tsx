@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 // import useAuthStore from "../zustandStore/store";
 
 export default function JobListingComp() {
-  const url: string = "http://localhost:5000";
+  const url: string = "http://3.108.5.175:5000";
   // const search = useAuthStore((state) => state.search);
   const [homePage, setHomePage] = useState([]);
   const navigate = useNavigate();

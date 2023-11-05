@@ -21,7 +21,7 @@ export default function AppliedJobs() {
       const data = localStorage.getItem("user_details");
       const userData = JSON.parse(data!);
       const email = userData?.email;
-      const url = `http://13.233.90.241:5000/v1/candidate/${email}/applied`;
+      const url = `http://3.108.5.175:5000/v1/candidate/${email}/applied`;
       const response = await axios.get(url);
 
       setJobs(response.data["applied"]);

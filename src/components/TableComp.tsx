@@ -21,7 +21,7 @@ export default function TableComp() {
   const [data, setData] = useState([]);
 
   const handleUserAppliedJobs = async (email: string) => {
-    const url = `http://localhost:5000/v1/candidate/${email}/applied`;
+    const url = `http://3.108.5.175:5000/v1/candidate/${email}/applied`;
     const response = await axios.get(url);
     if (response.status === 200) {
       setData(response.data["applied"]);
