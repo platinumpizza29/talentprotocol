@@ -1,9 +1,12 @@
 export default function AdminTableComp() {
   return (
-    <div className="h-full w-full">
-      <h2 className="text-2xl mx-4">Candidates</h2>
+    <div className="h-full w-full bg-base-100 rounded-xl border-2 p-8">
+      <div className="flex justify-between mx-4">
+        <h2 className="text-2xl mb-4">Notifications</h2>
+        <button className="btn btn-link">SEE ALL</button>
+      </div>
       <div className="">
-        <table className="table table-zebra overflow-x-scroll">
+        <table className="table overflow-x-scroll">
           {/* head */}
           <thead>
             <tr>

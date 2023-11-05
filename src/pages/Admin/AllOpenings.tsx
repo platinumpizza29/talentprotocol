@@ -18,7 +18,7 @@ export default function AllOpenings() {
           <div className="w-full p-4 gap-4 grid grid-cols-1 place-items-center md:grid-cols-3">
             {data.map((item, index) => (
               <motion.div
-                className="card h-52 w-full bg-base-100 shadow-xl m-2"
+                className="card h-52 w-full bg-base-100 border-2 m-2"
                 key={index}
                 transition={{ delay: 0.1 * index }}
                 initial={{ opacity: 0, y: 20 }}

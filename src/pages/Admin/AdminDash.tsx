@@ -6,16 +6,16 @@ import useAuthStore from "../../zustandStore/store";
 export default function AdminDash() {
   const logout = useAuthStore((state) => state.adminLogout);
   return (
-    <div className="h-screen w-screen bg-base-200 font-my-font overflow-y-auto">
+    <div className="h-screen w-screen bg-base-100 font-my-font overflow-y-auto">
       {/* drawer starts here */}
-      <div className="drawer lg:drawer-open">
+      <div className="drawer lg:drawer-open bg-base-100">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col items-center justify-center">
           {/* Page content here */}
 
           {/* navbar goes here */}
           <div className="h-full w-full">
-            <div className="navbar bg-base-200 w-full flex flex-row justify-between">
+            <div className="navbar bg-base-100 w-full flex flex-row justify-between shadow-sm">
               <div className="">
                 <label
                   htmlFor="my-drawer-2"
@@ -77,7 +77,7 @@ export default function AdminDash() {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <ul className="menu menu-md p-4 w-80 min-h-full bg-base-200 text-base-content">
+          <ul className="menu menu-md p-4 w-80 min-h-full bg-base-100 text-base-content shadow-sm">
             {/* Sidebar content here */}
             <h2 className="text-3xl font-bold">Talent Protocol</h2>
             <div className="divider"></div>

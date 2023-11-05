@@ -6,7 +6,7 @@ import Lottie from "lottie-react";
 import animationData from "../assets/job.json";
 import { useLogin } from "../controllers/UserController";
 import useAuthStore from "../zustandStore/store";
-import { AdminController } from "../controllers/AdminController";
+import { useAdminController } from "../controllers/AdminController";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -19,19 +19,26 @@ export default function LoginPage() {
 
   const { handleLogin } = useLogin();
 
+  const { handleAdminLogin } = useAdminController();
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSelectChange = (event: { target: { value: any } }) => {
     const selectedValue = event.target.value;
+    console.log(selectedValue);
+
     setSelectedOption(selectedValue);
   };
 
   const handleSubmit = async () => {
+    console.log(selectedOption);
     try {
       setLoading(true);
       if (selectedOption === "Yes") {
+        console.log("admin controller triggered");
         // Navigate to a different URL when "Yes" is selected
-        const res = await AdminController().handleAdminLogin(email);
+        const res = await handleAdminLogin(email);
         if (res === "ok") {
+          console.log("ok from controller");
           navigate("/v1/org");
           setLoading(false);
         } else {
@@ -53,13 +60,14 @@ export default function LoginPage() {
       }
     } catch (error) {
       console.log(error);
+      setLoading(false);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="h-screen w-screen grid grid-cols-1 md:grid-cols-2 p-6 m-0 bg-base-200">
+    <div className="h-screen w-screen grid grid-cols-1 md:grid-cols-2 p-6 m-0 bg-base-200 overflow-y-auto">
       <div
         className="hidden md:flex rounded-2xl items-center justify-center"
         style={{ width: "80%", height: "80%", objectFit: "cover" }}
