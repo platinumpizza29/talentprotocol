@@ -1,8 +1,10 @@
 import { BiMenuAltLeft } from "react-icons/bi";
 import CurrentOpeningCards from "../../components/AdminComp/cardscomp";
 import AdminTableComp from "../../components/AdminComp/tablecomp";
+import useAuthStore from "../../zustandStore/store";
 
 export default function AdminDash() {
+  const logout = useAuthStore((state) => state.adminLogout);
   return (
     <div className="h-screen w-screen bg-base-200 font-my-font overflow-y-auto">
       {/* drawer starts here */}
@@ -52,7 +54,7 @@ export default function AdminDash() {
                     <a>Settings</a>
                   </li>
                   <li>
-                    <a>Logout</a>
+                    <a onClick={logout}>Logout</a>
                   </li>
                 </ul>
               </div>

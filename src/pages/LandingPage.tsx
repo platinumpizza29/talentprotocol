@@ -48,30 +48,30 @@ export default function LandingPage() {
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
-              {/* <li>
+              <li>
                 <a
                   className="flex flex-row justify-between items-center"
                   onClick={() => navigate("/register")}
                 >
                   Sign Up <BiCaretRight className="text-lg" />
                 </a>
-              </li> */}
-              <li>
+              </li>
+              {/* <li>
                 <a
                   className="flex flex-row justify-between items-center"
                   onClick={() => navigate("/register")}
                 >
                   Join Waitlist <BiCaretRight className="text-lg" />
                 </a>
-              </li>
-              {/* <li>
+              </li> */}
+              <li>
                 <a
                   className="flex flex-row justify-between items-center"
                   onClick={() => navigate("/login")}
                 >
                   Sign In <BiCaretRight className="text-lg" />
                 </a>
-              </li> */}
+              </li>
             </ul>
           </div>
           <a className="btn btn-ghost normal-case text-2xl font-my-font-bold">

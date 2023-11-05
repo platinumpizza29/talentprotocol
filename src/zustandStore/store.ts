@@ -16,6 +16,7 @@ interface AuthStore {
 
   login: (token: string) => void;
   logout: () => void;
+  adminLogout: () => void;
 
   setUser: (user: AuthStore["user"]) => void;
 
@@ -42,6 +43,11 @@ const useAuthStore = create<AuthStore>((set) => ({
   logout: () => {
     localStorage.removeItem("jwtToken");
     localStorage.removeItem("user_details");
+    set({ isAuth: false });
+  },
+  adminLogout: () => {
+    localStorage.removeItem("jwtToken");
+    localStorage.removeItem("org_details");
     set({ isAuth: false });
   },
 
