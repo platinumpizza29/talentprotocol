@@ -10,7 +10,7 @@ export default function CurrentOpeningCards() {
   const [data, setData] = useState([]);
 
   const handleCurrentOpenings = async () => {
-    const url = "http://3.108.5.175:5000/v1/org/TalentProtocol/openings";
+    const url = "http://172.31.24.87:5000/v1/org/TalentProtocol/openings";
     const response = await axios.get(url);
     if (response.status === 200) {
       setData(response.data["openings"]);
