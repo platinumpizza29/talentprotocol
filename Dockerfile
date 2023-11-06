@@ -8,13 +8,13 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install app dependencies
-RUN bun install
+RUN npm install
 
 # Copy the rest of the application files to the container
 COPY . .
 
 # Build the React app using Vite and TypeScript for production
-RUN bun run build
+RUN npm run build
 
 # Use a lightweight, production-ready image as the base image
 FROM nginx:alpine
