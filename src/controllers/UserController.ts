@@ -4,8 +4,10 @@ import useAuthStore from "../zustandStore/store"; // Import useState from React
 export const useLogin = () => {
   const { login, setUser } = useAuthStore();
 
+  const url = process.env.REACT_APP_API_URL;
+
   const handleLogin = async (email: string, password: string) => {
-    const url: string = "http://3.108.5.175:5000";
+    //const url: string = "http://3.108.5.175:5000";
     try {
       const response = await axios.post(`${url}/login`, {
         email: email.toLowerCase(),
@@ -34,7 +36,7 @@ export const useLogin = () => {
     password: string,
     age: string
   ) => {
-    const url = "http://3.108.5.175:5000";
+    //const url = "http://3.108.5.175:5000";
     try {
       const response = await axios.post(`${url}/signup`, {
         full_name: full_name,

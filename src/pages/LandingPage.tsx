@@ -17,7 +17,8 @@ export default function LandingPage() {
   const [email, setEmail] = useState("");
 
   const handleWaitListApi = async () => {
-    const url = `http://3.108.5.175:5000/v1/candidate/${email}/waitlist/join`;
+    const api = process.env.REACT_APP_API_URL;
+    const url = `${api}/v1/candidate/${email}/waitlist/join`;
     const response = await axios.post(url);
     console.log(response.data);
   };
