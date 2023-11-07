@@ -16,11 +16,8 @@ COPY . .
 # Build the React app using Vite and TypeScript for production
 RUN npm run build
 
-# Use a lightweight, production-ready image as the base image
-FROM nginx:alpine
-
 # Copy the build files from the previous stage to the NGINX web server directory
-COPY --from=0 /app/dist /usr/share/nginx/html
+COPY --from=0 /app/dist /var/www/html
 
 # Expose port 80
 EXPOSE 80
