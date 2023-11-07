@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { PiSuitcaseLight } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { env } from "../../utils/env";
 
 export default function CurrentOpeningCards() {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ export default function CurrentOpeningCards() {
   const [data, setData] = useState([]);
 
   const handleCurrentOpenings = async () => {
-    const api = process.env.REACT_APP_API_URL;
+    const api = env;
     const url = `${api}/v1/org/TalentProtocol/openings`;
     const response = await axios.get(url);
     if (response.status === 200) {

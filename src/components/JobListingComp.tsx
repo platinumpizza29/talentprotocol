@@ -1,10 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { env } from "../utils/env";
 // import useAuthStore from "../zustandStore/store";
 
 export default function JobListingComp() {
-  const url = process.env.REACT_APP_API_URL;
+  const url = env;
   // const search = useAuthStore((state) => state.search);
   const [homePage, setHomePage] = useState([]);
   const navigate = useNavigate();

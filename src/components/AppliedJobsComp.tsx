@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { env } from "../utils/env";
 
 export default function AppliedJobs() {
   const status: Record<number, string> = {
@@ -21,7 +22,7 @@ export default function AppliedJobs() {
       const data = localStorage.getItem("user_details");
       const userData = JSON.parse(data!);
       const email = userData?.email;
-      const api = process.env.REACT_APP_API_URL;
+      const api = env;
       const url = `${api}/v1/candidate/${email}/applied`;
       const response = await axios.get(url);
 

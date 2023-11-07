@@ -1,7 +1,8 @@
 import axios from "axios";
+import { env } from "../utils/env";
 
 export const useTestController = () => {
-  const url = process.env.REACT_APP_API_URL;
+  const url = env;
   const handleTestSubmit = async (
     email: string,
     assignmentId: string,

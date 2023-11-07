@@ -10,6 +10,7 @@ import animationData from "../assets/job.json";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import { env } from "../utils/env";
 
 export default function LandingPage() {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ export default function LandingPage() {
   const [email, setEmail] = useState("");
 
   const handleWaitListApi = async () => {
-    const api = process.env.REACT_APP_API_URL;
+    const api = env;
     const url = `${api}/v1/candidate/${email}/waitlist/join`;
     const response = await axios.post(url);
     console.log(response.data);

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { env } from "../utils/env";
 
 export default function TableComp() {
   const status: Record<number, string> = {
@@ -21,7 +22,7 @@ export default function TableComp() {
   const [data, setData] = useState([]);
 
   const handleUserAppliedJobs = async (email: string) => {
-    const api = process.env.REACT_APP_API_URL;
+    const api = env;
     const url = `${api}/v1/candidate/${email}/applied`;
     const response = await axios.get(url);
     if (response.status === 200) {

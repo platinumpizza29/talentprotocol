@@ -1,10 +1,11 @@
 import axios from "axios";
 import useAuthStore from "../zustandStore/store"; // Import useState from React
+import { env } from "../utils/env";
 
 export const useLogin = () => {
   const { login, setUser } = useAuthStore();
 
-  const url = process.env.REACT_APP_API_URL;
+  const url = env;
 
   const handleLogin = async (email: string, password: string) => {
     //const url: string = "http://3.108.5.175:5000";

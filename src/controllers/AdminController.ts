@@ -1,8 +1,9 @@
 import axios from "axios";
 import useAuthStore from "../zustandStore/store";
+import { env } from "../utils/env";
 
 export const useAdminController = () => {
-  const api = process.env.REACT_APP_API_URL;
+  const api = env;
   const url = `${api}/v1/org/login`;
   const { login, setUser } = useAuthStore();
   const handleAdminLogin = async (email: string) => {
