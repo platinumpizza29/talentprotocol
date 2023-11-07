@@ -2,7 +2,7 @@ import axios from "axios";
 import useAuthStore from "../zustandStore/store";
 
 export const useAdminController = () => {
-  const url = "http://172.31.24.87:5000/v1/org/login";
+  const url = "http://3.108.5.175:5000/v1/org/login";
   const { login, setUser } = useAuthStore();
   const handleAdminLogin = async (email: string) => {
     const response = await axios.post(url, { email: email, password: "" });
