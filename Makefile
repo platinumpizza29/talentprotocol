@@ -1,3 +1,5 @@
 run:
-	sudo docker build -t keyurbilgi/talentprotocol
-	sudo docker run -d -p 80:80 keyurbilgi/talentprotocol
+	npm run build
+	git add .
+	git commit -m "new changes"
+	git push
