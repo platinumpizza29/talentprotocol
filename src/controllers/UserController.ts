@@ -34,7 +34,7 @@ export const useLogin = () => {
     password: string,
     age: string
   ) => {
-    const url = "http://172.31.24.87:5000";
+    const url = "http://3.108.5.175:5000";
     try {
       const response = await axios.post(`${url}/signup`, {
         full_name: full_name,
