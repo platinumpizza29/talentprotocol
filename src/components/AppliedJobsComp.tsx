@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { env } from "../utils/env";
+import { motion } from "framer-motion";
 
 export default function AppliedJobs() {
   const status: Record<number, string> = {
@@ -56,9 +57,12 @@ export default function AppliedJobs() {
       ) : (
         <div className="h-96 w-full p-4">
           {jobs.map((item, index) => (
-            <div
+            <motion.div
               className="card w-full bg-base-100 border-2 border-base-300 mt-10"
               key={index}
+              transition={{ delay: 0.1 * index }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
             >
               <div className="card-body">
                 <div className="card-actions flex flex-row justify-between">
@@ -85,7 +89,7 @@ export default function AppliedJobs() {
                   </button>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       )}
