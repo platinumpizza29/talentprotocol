@@ -1,5 +1,5 @@
 run:
 	npm run build
 	git add .
-	git commit -m "new changes"
+	git commit -m "minor changes"
 	git push

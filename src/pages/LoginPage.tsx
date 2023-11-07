@@ -30,7 +30,7 @@ export default function LoginPage() {
   };
 
   const handleSubmit = async () => {
-    console.log(selectedOption);
+    console.log(selectedOption, "debug");
     try {
       setLoading(true);
       if (selectedOption === "Yes") {
