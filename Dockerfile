@@ -1,5 +1,5 @@
 # Use an official Node runtime as a parent image
-FROM node:latest as build
+FROM node:latest
 
 # Set the working directory in the container
 WORKDIR /app
@@ -20,7 +20,7 @@ RUN npm run build
 FROM nginx:alpine
 
 # Copy the build files from the previous stage to the NGINX web server directory
-COPY --from=build /app/dist /usr/share/nginx/html
+COPY --from=0 /app/dist /usr/share/nginx/html
 
 # Expose port 80
 EXPOSE 80
