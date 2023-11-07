@@ -1,1 +1,1 @@
-export const env = "http://127.0.0.1:5000";
+export const env = "http://172.31.24.87:5000";
