@@ -50,7 +50,7 @@ export default function AppliedJobs() {
   return (
     <div className="h-full w-full mx-4 md:mx-12 lg:24 font-my-font">
       <h1>Applied Jobs</h1>
-      {jobs.length === 0 ? (
+      {jobs === null ? (
         <div className="h-full w-full flex justify-center items-center">
           <span>No applied jobs found.</span>
         </div>

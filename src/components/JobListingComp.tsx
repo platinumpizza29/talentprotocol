@@ -2,11 +2,12 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { env } from "../utils/env";
-// import useAuthStore from "../zustandStore/store";
+import useAuthStore from "../zustandStore/store";
+import { motion } from "framer-motion";
 
 export default function JobListingComp() {
   const url = env;
-  // const search = useAuthStore((state) => state.search);
+  const search = useAuthStore((state) => state.search);
   const [homePage, setHomePage] = useState([]);
   const navigate = useNavigate();
   const getJobListing = async () => {
@@ -28,41 +29,51 @@ export default function JobListingComp() {
       {/* <div className="h-full w-full p-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"> */}
       <div className="m-4">
         {homePage && homePage.length > 0 ? (
-          homePage.map((item, index) => (
-            <div
-              className="card card-compact w-full border-2 border-base-300 bg-base-100 shadow-xl mb-4"
-              key={index}
-            >
-              <div className="card-body">
-                <h2 className="card-title">{item["org_name"]}</h2>
-                <p>{item["opening_name"]}</p>
+          homePage
+            .filter((item) => {
+              return search.toLowerCase() === ""
+                ? item
+                : item["opening_name"].toLowerCase().includes(search);
+            })
+            .reverse()
+            .map((item, index) => (
+              <motion.div
+                className="card card-compact w-full border-2 border-base-300 bg-base-100 shadow-xl mb-4"
+                key={index}
+                transition={{ delay: 0.1 * index }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+              >
+                <div className="card-body">
+                  <h2 className="card-title">{item["org_name"]}</h2>
+                  <p>{item["opening_name"]}</p>
 
-                <div className="card-actions justify-end">
-                  <button
-                    className="btn btn-accent"
-                    onClick={() => {
-                      const dialog = document.getElementById(
-                        `${index}`
-                      ) as HTMLDialogElement;
-                      dialog?.showModal();
-                    }}
-                  >
-                    View Details
-                  </button>
-                  <button
-                    className="btn btn-primary"
-                    onClick={() =>
-                      navigate("/test", {
-                        state: { item: JSON.stringify(item) },
-                      })
-                    }
-                  >
-                    Assessment
-                  </button>
+                  <div className="card-actions justify-end">
+                    <button
+                      className="btn btn-accent"
+                      onClick={() => {
+                        const dialog = document.getElementById(
+                          `${index}`
+                        ) as HTMLDialogElement;
+                        dialog?.showModal();
+                      }}
+                    >
+                      View Details
+                    </button>
+                    <button
+                      className="btn btn-primary"
+                      onClick={() =>
+                        navigate("/test", {
+                          state: { item: JSON.stringify(item) },
+                        })
+                      }
+                    >
+                      Assessment
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </div>
-          ))
+              </motion.div>
+            ))
         ) : (
           <div className="h-full w-full text-gray-500 flex justify-center items-center ">
             <span className="loading loading-spinner loading-md"></span>

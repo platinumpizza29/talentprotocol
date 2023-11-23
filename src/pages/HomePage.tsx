@@ -1,9 +1,4 @@
-import {
-  BiMenuAltLeft,
-  BiCaretRight,
-  BiFilterAlt,
-  BiSolidBookmarkAlt,
-} from "react-icons/bi";
+import { BiMenuAltLeft, BiCaretRight } from "react-icons/bi";
 import { BsFillPatchCheckFill } from "react-icons/bs";
 import { HiSquares2X2 } from "react-icons/hi2";
 import { PiSuitcaseSimpleFill } from "react-icons/pi";
@@ -16,6 +11,7 @@ export default function HomePage() {
   const logout = useAuthStore((state) => state.logout);
   const currentPage = useAuthStore((state) => state.currentPage);
   const setCurrentPage = useAuthStore((state) => state.setCurrentPage);
+  const setSearch = useAuthStore((state) => state.setSearch);
 
   const MyComp = () => {
     if (currentPage === 0) {
@@ -43,6 +39,14 @@ export default function HomePage() {
             </label>
             {/* header and navigation */}
             <div className="flex flex-row justify-end items-center w-full">
+              <div className="mx-4">
+                <input
+                  type="text"
+                  placeholder="Filter"
+                  onChange={(e) => setSearch(e.target.value)}
+                  className="input input-bordered w-full max-w-xs"
+                />
+              </div>
               <div className="dropdown dropdown-end">
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                   <div className="w-10 rounded-full">
@@ -99,29 +103,6 @@ export default function HomePage() {
                 Job Listing <BiCaretRight className="text-lg" />
               </a>
             </li>
-            <li>
-              <a className="flex flex-row justify-between items-center">
-                Filters <BiFilterAlt className="text-lg" />
-              </a>
-              <ul>
-                <li>
-                  <input
-                    type="text"
-                    placeholder="Filter"
-                    className="input input-bordered w-full max-w-xs"
-                  />
-                </li>
-                <li>
-                  <a>Software Developer</a>
-                </li>
-                <li>
-                  <a>Front End Developer</a>
-                </li>
-                <li>
-                  <a>Back End Developer</a>
-                </li>
-              </ul>
-            </li>
             <li className="">
               <a
                 className="flex flex-row justify-between items-center"
@@ -129,12 +110,6 @@ export default function HomePage() {
               >
                 <BsFillPatchCheckFill />
                 Applied Jobs <BiCaretRight className="text-lg" />
-              </a>
-            </li>
-            <li>
-              <a className="flex flex-row justify-between items-center">
-                <BiSolidBookmarkAlt />
-                Saved Jobs <BiCaretRight className="text-lg" />
               </a>
             </li>
           </ul>

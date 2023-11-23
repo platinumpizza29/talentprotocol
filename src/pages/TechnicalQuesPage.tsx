@@ -73,7 +73,7 @@ export default function TechnicalQuesPage() {
   }, [data]);
 
   return (
-    <div className="h-screen w-screen">
+    <div className="h-screen w-screen bg-base-200 font-my-font">
       <div className="navbar">
         <div className="navbar-start">
           <a className="btn btn-ghost normal-case text-xl">
@@ -90,11 +90,11 @@ export default function TechnicalQuesPage() {
         </div>
       </div>
       <div className="mx-4 md:mx-12 lg:mx-24 xl:mx-48">
-        <h1>Code Analysis Questions</h1>
+        <h2 className="text-2xl my-8">Code Analysis Questions</h2>
         {codeAnalysisQues && codeAnalysisQues.length > 0 ? (
           codeAnalysisQues.map((item, index) => (
             <div key={index} className="flex flex-col m-10">
-              <span className="text-xl">{item}</span>
+              <span className="text-xl my-4">{item}</span>
               <textarea
                 className="textarea textarea-primary"
                 placeholder="Answer"
@@ -105,11 +105,11 @@ export default function TechnicalQuesPage() {
         ) : (
           <p>Loading code analysis questions...</p>
         )}
-        <h1>Technical Questions</h1>
+        <h2 className="text-2xl my-8">Technical Questions</h2>
         {techQues && techQues.length > 0 ? (
           techQues.map((item, index) => (
             <div key={index} className="flex flex-col m-10">
-              <p>{item}</p>
+              <span className="text-xl my-4">{item}</span>
               <textarea
                 className="textarea textarea-primary"
                 placeholder="Answer"

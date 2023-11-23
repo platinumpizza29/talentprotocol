@@ -9,6 +9,8 @@ import TechnicalQuesPage from "./pages/TechnicalQuesPage";
 import ApplicationDetails from "./components/ApplicationDetailsComp";
 import AdminDash from "./pages/Admin/AdminDash";
 import AllOpenings from "./pages/Admin/AllOpenings";
+import CreateOpeningPage from "./pages/Admin/CreateOpeningPage";
+import SelectedCandiatesPage from "./pages/Admin/SelectedCandidatesPage";
 
 function App() {
   return (
@@ -26,6 +28,11 @@ function App() {
           {/* admin routes */}
           <Route path="/v1/org/all_openings" element={<AllOpenings />} />
           <Route path="/v1/org" element={<AdminDash />} />
+          <Route path="/v1/org/opening" element={<CreateOpeningPage />} />
+          <Route
+            path="/v1/org/opening/:id/selectedCandidates"
+            element={<SelectedCandiatesPage />}
+          />
         </Route>
       </Routes>
     </Router>

@@ -1,0 +1,31 @@
+ code api
+
+Client:
+url: http://65.0.116.137:5000;
+
+
+
+1) /login
+body: {
+    email
+    password
+}
+
+2) /register
+body: {
+    full_name,
+    email,
+    password,
+    age
+}
+
+3) /${url}/v1/candidate/${email}/${assignmentId}/submit
+body: {
+    email: string,
+    assignmentId: string,
+    code: string,
+    code_analysis_answers: string[],
+    technical_answers: string[]
+}
+
+4) 

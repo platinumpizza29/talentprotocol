@@ -1,8 +1,14 @@
 import { BiMenuAltLeft } from "react-icons/bi";
 import CurrentOpeningCards from "../../components/AdminComp/cardscomp";
 import AdminTableComp from "../../components/AdminComp/tablecomp";
+import { LuLayoutDashboard } from "react-icons/lu";
+import { FaEnvelopeOpenText } from "react-icons/fa";
+import { AiOutlineSchedule } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 export default function AdminDash() {
+  const navigate = useNavigate();
+
   return (
     <div className="h-screen w-screen bg-base-100 font-my-font overflow-y-auto">
       {/* drawer starts here */}
@@ -81,13 +87,22 @@ export default function AdminDash() {
             <h2 className="text-3xl font-bold">Talent Protocol</h2>
             <div className="divider"></div>
             <li className="mt-10">
-              <a>Dashboard</a>
+              <a className="text-lg">
+                <LuLayoutDashboard className="text-xl" />
+                Dashboard
+              </a>
             </li>
             <li>
-              <a>Schedule</a>
+              <a className="text-lg">
+                <AiOutlineSchedule className="text-xl" />
+                Schedule
+              </a>
             </li>
-            <li>
-              <a>Create Opening</a>
+            <li onClick={() => navigate("/v1/org/opening")}>
+              <a className="text-lg">
+                <FaEnvelopeOpenText />
+                Create Opening
+              </a>
             </li>
           </ul>
         </div>
